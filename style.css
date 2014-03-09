@@ -57,7 +57,7 @@ body[appLauncher]
 	width: 5%;
 	height: 5%;
 	z-index: 10;
-    -webkit-border-radius: 100px;
+ /*   -webkit-border-radius: 100px;*/
     background-color: #fff;
     padding: 10px;
     
