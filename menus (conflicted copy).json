@@ -1,0 +1,10 @@
+{
+"menus": [
+{ "title":"test" , "color":"green", "href":"testapp.html" }, 
+{ "title":"mojang" , "color":"red", "href":"http://mojang.com/" }, 
+{ "title":"tumblr" , "color":"tBlue", "href":"tumblrapp.html" },
+{ "title":"3d" , "color":"purple", "href":"3dapp.html" },
+{ "title":"twitter", "color":"tbBlue", "href":"twitterapp.html", "extraHTML":"<button href='' onclick=''>test</button>"},
+{ "title":"about", "color":"lightblue", "href":"about.html"}
+]
+}

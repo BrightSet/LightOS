@@ -1,0 +1,11 @@
+{
+"menus": [
+{ "title":"test" , "color":"green", "href":"testapp.html", "icon":"icons/test.png" }, 
+{ "title":"minecraft updates" , "color":"red", "href":"http://mcupdate.tumblr.com/", "icon":"icons/mc.png" }, 
+{ "title":"twitter", "color":"tbBlue", "href":"twitterapp.html","secondSide":"<a href=\"http://twitter.com/intent/tweet\">Tweet</a>", "icon":"icons/twitter.png"},
+{ "title":"settings", "color":"lightblue", "href":"settingsapp.html", "icon":"icons/settings.png"},
+{ "title":"scratch", "color":"orange", "href":"http://scratch.mit.edu/", "icon":"icons/scratch.png"},
+{ "title":"launcher", "color":"orange", "href":"applauncher.html", "icon":"icons/launcher.png"},
+{ "title":"sapp", "color":"orange", "href":"applauncher.html", "icon":"icons/launcher.png"}
+]
+}

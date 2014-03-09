@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lockscreen>
+<head>
+<meta charset="utf-8">
+<title>lockscreen</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="hexaflip.css" type="text/css" />
+
+<script src="jquery-1.10.2.min.js" type="text/javascript"></script>
+</head>
+
+<body lockscreen>
+<h1 id='time' style="text-align:center; font-size:72pt; color:white; font-family: Helvetica Neue; font-weight: 200;">
+<script>
+var currentTime = new Date()
+	var hours = currentTime.getHours()
+	var minutes = currentTime.getMinutes()
+
+	if (minutes < 10)
+	minutes = "0" + minutes
+
+	document.getElementById("time").innerHTML = hours + ":" + minutes;
+</script>
+</h1>
+<script src="hexaflip.js" type="text/javascript"></script>
+<div id="unlock" style="margin:0 auto; background-color:rgba(0,0,0,0)" ondrag="alert('hey!');"></div>
+<button style="margin-left:50%; width:1%" onclick="unlock()"> </button>
+<script>
+
+var uCube = new HexaFlip(document.getElementById("unlock"), {
+
+unlock:[{
+value: "pull up and press to unlock", 
+style:{width:"100%", backgroundColor:"rgba(0,0,0,1)", fontSize:"24pt", verticalAlign:"middle", fontFamily:"Helvetica Neue", fontWeight:"100"}
+},
+{
+value: " ", 
+style:{width:"100%", backgroundColor:"rgba(0,0,0,1)", fontSize:"36pt", verticalAlign:"middle"},
+    
+},
+
+],
+
+});
+function unlock() {
+	if(uCube.getValue().join(' ') === " ")
+	{
+		location.href = "index.html";
+	}
+}
+</script>
+
+</body>
+</html>

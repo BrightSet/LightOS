@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html home>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="stylesheet" href="animate.min.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, 
+    minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" type="text/css" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <script src="jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="xLang.js" type="text/javascript"></script>
+    <script src="mousetrap.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+    <script src="jquery.playSound.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="hexaflip.css" type="text/css" />
+    <script src="base.js" type="text/javascript"></script>
+    <!--<link rel="stylesheet" href="default.css" type="text/css" />-->
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic' rel='stylesheet' type='text/css' />
+    <link rel="apple-touch-icon-precomposed" href="icon.png" />
+    <link rel="apple-touch-startup-image" href="/splash.png" />
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="preloader.css" rel="stylesheet" />
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <title>forWardOS | Beta 1.0.0</title>
+</head>
+
+<body id='body' home class="sBG" onload='$("#dockContainer, .background, #mCBg").hide(); startTime();mok() '>
+<div id="aom" style="width:100%;height:100%;background-color:white;">
+<br>
+<p>
+
+<h1>IMPORTANT INFORMATION</h1>
+THIS PRODUCT IS A PROTOTYPE<br>
+AUTHORIZED USE ONLY<br>
+NOT FOR RESALE<br>
+</p>
+<button onclick="localStorage.mok = true; mok()" style="border: 2px solid black;">OK</button>
+<button onclick="history.back()" style="border: 2px dashed black;">Cancel</button>
+</div>
+</div>
+<!-- Preloader -->
+
+<div id="preloader">
+<noscript>
+<div id="statusError">&nbsp;</div>
+</noscript>
+</div>
+<script type="text/javascript">
+	//<![CDATA[
+		$(window).load(function() { // makes sure the whole site is loaded
+			$('#preloader').append("<div id=\"status\">&nbsp;</div>");
+			$('#status').fadeOut(); // will first fade out the loading animation
+			$('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+			$('body').delay(350).css({'overflow':'visible'});
+		})
+	//]]>
+</script> 
+    <noscript>
+        <style type="text/css">
+            * {
+                -webkit-transition: all 2s;
+                -webkit-filter: grayscale(1);
+            }
+            h1,
+            #menuContainer {
+                visibility: hidden;
+            }
+            #alertdiv {
+                color: white;
+                vertical-align: middle;
+                text-align: middle;
+                margin-left: 37.5%;
+            }
+        </style>
+        <div id="alertdiv">You don't have JavaScript enabled. It's required -.-</div>
+    </noscript>
+    <div id='homescreen'>
+    <h1 style="color:white;">AUTHORIZED USE ONLY</h1>
+        <div style="font-family: Helvetica Neue, Helvetica, Arial;
+	font-weight: 200;
+	font-size: 26pt; color:black;">
+            <!--<h1 style="color:grey; text-shadow:2px 2px 6px #000f">apps</h1>-->
+            <h1>Clock<sub>gmt</sub></h1>
+            <div id="clock"></div>
+            <script>
+            localStorage.weathercity = localStorage.weathercity;
+                function startTime() {
+                    var today = new Date();
+                    var h = today.getHours();
+                    var m = today.getMinutes();
+                    var s = today.getSeconds();
+                    // add a zero in front of numbers<10
+                    m = checkTime(m);
+                    s = checkTime(s);
+                    document.getElementById('clock').innerHTML = h + ":" + m + ":" + s;
+                    t = setTimeout(function () {
+                        startTime()
+                    }, 500);
+                }
+
+                function checkTime(i) {
+                    if (i < 10) {
+                        i = "0" + i;
+                    }
+                    return i;
+                }
+            </script>
+
+        </div>
+        <div id="weather" style="">
+        <h1 style="color:black;">Weat<a href="forwardos://print('Hello, from the h')" style='text-decoration: none; color:black;'>h</a>er<sub id='wcitydisplay'>vienna</sub></h1>
+        <p>weather data from <a href="http://openweathermap.org/">openweathermap.org</a></p>
+        <img id="weather-icon" style="width: 5%; height: 5%; float: left;" />
+        <h2 id="weather-temp" style="float:left;"></h2>
+        <h2 id="weather-temp-more" style="float:left;"></h2>
+         <h2 id="weather-temp-celsius" style="float:left;">&nbsp;°C</h2>
+            <script>
+            if(localStorage.isWeatherSet == "false" || localStorage.isWeatherSet == undefined)
+            {
+                //localStorage.weathercity = "Vienna,at";
+                localStorage.isWeatherSet = false;
+                document.getElementById("weather-temp").innerHTML += "<br><p style='font-size:small;'>Please note, the weather-city set to vienna, austria, because you didn't set another one. Please start the settings app and enter your city in format: city, country code(see <a href='http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements'>wikipedia-page</a>)</p>"
+            }
+            document.getElementById("wcitydisplay").innerHTML = localStorage.weathercity;
+                $.getJSON( "http://api.openweathermap.org/data/2.5/weather?q=" + localStorage.weathercity, function( json ) {
+                    console.log(json);
+                    var moreTemp = "false";
+                    document.getElementById("weather-temp").className = false;
+                    for (var i = json.weather.length - 1; i >= 0; i--) {
+                        document.getElementById("weather-icon").src = "http://openweathermap.org/img/w/" + json.weather[i].icon + ".png";
+                    };
+                    document.getElementById("weather-temp").innerHTML += ((json.main.temp - 273.15)).toFixed(1);
+                    $("#weather-temp").click(function () {
+                        moreTemp = moreTemp == 'true' ? 'false' : 'true';
+                        if(moreTemp == "true")
+                        {
+                            document.getElementById("weather-temp").innerHTML = ((json.main.temp - 273.15));
+                        }
+                        else
+                        {
+                            document.getElementById("weather-temp").innerHTML = ((json.main.temp - 273.15)).toFixed(1);
+                        }
+                    });
+                });
+                
+            </script>
+        </div>
+        <div id="mCBg" class="sBG">&nbsp;</div>
+        
+        <div id="widgetContainer">
+        </div>
+        <script src="hexaflip.js"></script>
+    </div>
+    <div id="dockContainer" name="menu">
+    </div>
+</body>
+
+</html>

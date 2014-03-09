@@ -1,0 +1,9 @@
+{
+"apps": [
+{ "ident":"testapp", "title":"test", "color":"green", "content":"hello, world!"},
+{ "ident":"tumblrapp", "title":"tumblr", "color":"tBlue", "content":"<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js\" /><script>$(document).ready(function(){$.getJSON('http://api.tumblr.com/v2/blog/nicelikebagels.tumblr.com/posts/text?api_key=W13TrOkPmEs1fVup2HUaGshiLE4ye5iiQsojvEhbglncfLecxE&callback=?',function(result){$('#app').append('Blogtitle: <p style=\"font-weight: bold;\">' + result.response.blog.title + '</p><br>Posts: <p style=\"font-weight: bold;\">' + result.response.blog.posts + '</p><br>URL:<p style=\"font-weight: bold;\">' + result.response.blog.url + '</p>');});});</script>"},
+{ "ident":"3dapp", "title":"3d app", "color":"purple", "content":"<style>@-webkit-keyframes spinner { from { -webkit-transform: rotateY(0deg); } to { -webkit-transform: rotateY(-360deg); } } #stage { margin: 1em auto; -webkit-perspective: 1200px; } #spinner { -webkit-animation-name: spinner; -webkit-animation-timing-function: linear; -webkit-animation-iteration-count: infinite; -webkit-animation-duration: 6s; -webkit-transform-style: preserve-3d; } #spinner:hover { -webkit-animation-play-state: paused; } #spinner img { position: absolute; border: 1px solid #ccc; background: rgba(255,255,255,0.8); box-shadow: inset 0 0 20px rgba(0,0,0,0.2); }</style><div id='stage'><p id='spinner' style='text-align: center; font-size:72pt;'>Hello, World!</p></div>"},
+{ "ident":"twitterapp", "title":"twitter", "color":"tbBlue", "content":"<a href='http://twitter.com/intent/tweet'>Tweet</a>"},
+{ "ident":"aboutapp", "title":"about", "color":"", "content":"Copyright 2014.<br><br>All rights reserved."}
+]
+}

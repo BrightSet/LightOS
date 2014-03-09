@@ -1,0 +1,11 @@
+{
+"widgets": [
+{"content":""},
+{"content":"<div id='time' style='font-size:36pt;'></div><script>var d = new Date(); fcall();function fcall() { window.setInterval(function() { t(); }, 1000);}function t() { d = new Date();  var s = d.getSeconds(); if(s < 10) {  s = '0' + s;   } else {  s = d.getSeconds(); } $('#time').text(d.getHours() + ':' + d.getMinutes() + ':' + s);}</script>"},
+{"content":"test1"},
+{"content":"test2"},
+{"content":"test3"},
+{"content":"test4"}
+
+]
+}
