@@ -69,7 +69,7 @@ function mok() {
 	}
 }
 $(document).ready(function () {
-	
+	$("*").toggleClass("cursor");
 	
     $('#slide').click(function () {
         var hidden = $('.hidden');
