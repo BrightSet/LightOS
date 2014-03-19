@@ -175,7 +175,12 @@ right: auto;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
--webkit-filter: blur(1px);
+/*blur*/
+filter: blur(1px); -webkit-filter: blur(1px); -moz-filter: blur(1px);
+-o-filter: blur(1px); -ms-filter: blur(1px);
+filter: url(blur.svg#blur);
+filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='3');
+/**/
 width: 100%;
 position: fixed;
 -webkit-transform: scale(1.1);
