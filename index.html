@@ -124,7 +124,7 @@ NOT FOR RESALE<br>
                 localStorage.isWeatherSet = false;
                 document.getElementById("weather-temp").innerHTML += "<br><p style='font-size:small;'>Please note, the weather-city set to vienna, austria, because you didn't set another one. Please start the settings app and enter your city in format: city, country code(see <a href='http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements'>wikipedia-page</a>)</p>"
             }
-            document.getElementById("wcitydisplay").innerHTML = localStorage.weathercity;
+            document.getElementById("wcitydisplay").innerHTML = localStorage.weathercity.split(",")[0];
                 $.getJSON( "http://api.openweathermap.org/data/2.5/weather?q=" + localStorage.weathercity, function( json ) {
                     console.log(json);
                     var moreTemp = "false";

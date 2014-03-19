@@ -188,7 +188,7 @@ right: auto;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-/*-webkit-filter: blur(2px);*/
+-webkit-filter: blur(1px);
 width: 100%;
 position: fixed;
 -webkit-transform: scale(1.1);
