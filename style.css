@@ -1,18 +1,13 @@
 html[home], body[home] {
   	height: 100%;
-
-  	
-  	
-  	
+    margin:12pt;
 }
 .cursor
 {
   cursor: url(cursor.gif),auto;
-
 }
 html[appLauncher], body[appLauncher] {
   	height: 100%;
-  	
 }
 html[lockscreen], body[lockscreen] {
     margin: 0;
@@ -22,14 +17,9 @@ html[lockscreen], body[lockscreen] {
   	-moz-background-size: cover;
   	-o-background-size: cover;
   	background-size: cover;
-  	
-  	
-  	
 }
 body[appLauncher]
 {
-	
-	
 }
 .sBG
 {
@@ -65,7 +55,7 @@ body[appLauncher]
 	z-index: 10;
  /*   -webkit-border-radius: 100px;*/
     background-color: #fff;
-    padding: 10px;
+    /*padding: 10px;*/
     
 }
 .appBG
@@ -100,12 +90,9 @@ figcaption {
     color: #bb3333;
 }
 figure {
-    padding: 0px;
     white-space: nowrap;
     position: relative;
      float: right;
-     width: 200%;
-     height: 200%;
 }
 .icon:hover {
     transform: scale(1.1);
@@ -211,11 +198,9 @@ font-size: 400%;
 font-weight: lighter;
 color: gray;
 text-shadow:1 1 10px white;
-
 background-color: white;
 /*border-bottom:solid gray 1.25pt;*/
 z-index: 3;
-
 }
 .icon:active
 {
