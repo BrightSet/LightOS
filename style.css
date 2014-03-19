@@ -1,8 +1,14 @@
 html[home], body[home] {
   	height: 100%;
+
   	
   	
   	
+}
+.cursor
+{
+  cursor: url(cursor.gif),auto;
+
 }
 html[appLauncher], body[appLauncher] {
   	height: 100%;
@@ -120,7 +126,6 @@ figure {
  /*-webkit-transform:translate3d(0,0,0);
   transform:translate3d(0,0,0);
   -webkit-transform: translateZ(0);*/
-  cursor:default;
 }
 @media all and (orientation:portrait) {
 .item
@@ -150,10 +155,11 @@ font-size:36pt;
 {
 text-decoration: none;
 }
-.defaultCursor
+/*.defaultCursor
 {
 cursor: default;
 }
+*/
 .cube
 {
 display: inline-block;
