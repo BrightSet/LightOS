@@ -1,6 +1,6 @@
-html[home], body[home] {
+html[home]:not(#mainBar), body[home]:not(#mainBar) {
   	height: 100%;
-    margin:12pt;
+    /*margin:12pt;*/
 }
 .cursor
 {
@@ -20,6 +20,22 @@ html[lockscreen], body[lockscreen] {
 }
 body[appLauncher]
 {
+}
+#mainBar
+{
+  background-color: black;
+  position: fixed;
+  width: 100%;
+  margin: 0;
+  bottom:0;
+  z-index: 0;
+  height: 3.25%;
+  font-size:27pt;
+  font-family: Lucida Console;
+  text-align:center;
+  color:white;
+  
+
 }
 .sBG
 {
@@ -74,6 +90,7 @@ body[appLauncher]
 #homescreen
 {
 	position: relative;
+  margin:12pt;
 }
 /**/
 #container {
@@ -154,6 +171,18 @@ display: inline-block;
     /*float: left;*/
     
 }
+
+sup {
+  /* Move the superscripted text up */
+  top: -0.5em;
+}
+ 
+sub {
+  /* Move the subscripted text down, but only
+     half as far down as the superscript moved up */
+  bottom: -0.25em;
+}
+
 #dockContainer
 {
 /*-webkit-perspective: 800px;
@@ -164,7 +193,7 @@ white-space: nowrap;
 text-align: left;
 position: fixed;
 width: 100%;
-bottom: 0;
+bottom: 3.25%;
 left:37.5%;
 right: auto;
 /*background-color: rgba(255,255,255,0.8);*/
