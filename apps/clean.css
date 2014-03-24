@@ -1,0 +1,28 @@
+html, body
+{
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 200;
+   -webkit-font-smoothing: antialiased;
+}
+h1
+{
+	font-weight: 500;
+}
+#mainBar
+{
+  background-color: rgba(0,0,0,0.25);
+  position: fixed;
+  width: 100%;
+  margin: 0;
+  bottom:0;
+  z-index:5242;
+  height: 3.25%;
+  font-size:27pt;
+  font-family: Lucida Console;
+  text-align:center;
+  color:#686868;
+}
+.cursor
+{
+  cursor: url(cursor.gif),auto;
+}
