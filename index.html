@@ -20,10 +20,11 @@
     <!--<link rel="stylesheet" href="default.css" type="text/css" />-->
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic' rel='stylesheet' type='text/css' />
     <link rel="apple-touch-icon-precomposed" href="icon.png" />
-    <link rel="apple-touch-startup-image" href="/splash.png" />
+    <link rel="apple-touch-startup-image" href="splash.png" />
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="preloader.css" rel="stylesheet" />
     <script src="bootstrap/js/bootstrap.min.js"></script>
+
     <title>lightOS | Beta 1.0.0</title>
 </head>
 
@@ -78,7 +79,7 @@ NOT FOR RESALE<br>
         <div id="alertdiv">You don't have JavaScript enabled. It's required -.-</div>
     </noscript>
     <div id='homescreen'>
-    <h1 style="color:white;" onclick="$(this).slideUp(500);">AUTHORIZED USE ONLY</h1>
+    <h1 style="color:white;" onclick="$(this).slideUp(500);" ontouchend="$(this).slideUp(500);">AUTHORIZED USE ONLY</h1>
         <div style="font-family: Helvetica Neue, Helvetica, Arial;
 	font-weight: 200;
 	font-size: 26pt; color:black;">
@@ -156,7 +157,7 @@ NOT FOR RESALE<br>
     </div>
     <div id="dockContainer" name="menu">
     </div>
-<div id='mainBar' style="line-height:140%;"><span style='margin-right:90%; '>&#8617;</span><span style='position:fixed; margin-left:-45%; line-height:100%;' onclick='location.href="index.html"' ontouchstart='location.href="index.html"'>⌂</span><span style='line-height:120%; vertical-align:top; ' onclick='location.href=\"apps/applauncher.html\"' ontouchstart='location.href="apps/applauncher.html"'>&#9992;</span> </div>
+<div id='mainBar' style="line-height:140%;"><span style='margin-right:90%; '>&#8617;</span><span style='position:fixed; margin-left:-45%; line-height:100%;' onclick='location.href="index.html"' ontouchstart='location.href="index.html"'>⌂</span><span style='line-height:120%; vertical-align:top; ' onclick='location.href="apps/applauncher.html"' ontouchstart='location.href="apps/applauncher.html"'>&#9992;</span> </div>
 </body>
 
 </html>

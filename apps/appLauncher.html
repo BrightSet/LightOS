@@ -4,31 +4,18 @@
 <meta charset="utf-8">
 <title>App Launcher</title>
 <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css" type="text/css" />
-    <link rel="stylesheet" href="animate.min.css" type="text/css" />
-    <meta name="viewport" content="width=device-width, 
-    minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" href="jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" type="text/css" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <script src="jquery-1.10.2.min.js" type="text/javascript"></script>
-    <script src="xLang.js" type="text/javascript"></script>
-    <script src="mousetrap.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-    <script src="jquery.playSound.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="hexaflip.css" type="text/css" />
-    <script src="base.js" type="text/javascript"></script>
-    <!--<link rel="stylesheet" href="default.css" type="text/css" />-->
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic' rel='stylesheet' type='text/css' />
-    <link rel="apple-touch-icon-precomposed" href="icon.png" />
-    <link rel="apple-touch-startup-image" href="/splash.png" />
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="preloader.css" rel="stylesheet" />
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="../style.css" type="text/css" />
+    <script type="text/javascript" src="../base.js"></script>
+    <style type="text/css">*:not(.icon) {margin: 0} body,html { background: url(../city.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;}</style>
 </head>
 
 <body appLauncher>
-<p style="position:fixed; float:left; ">&lt;----</p>
+<br>
 <!-- Preloader -->
 
 <div id="preloader">
@@ -47,9 +34,11 @@
 		})
 	//]]>
 </script> 
-<img src="tree.jpg" class="background" style="user-drag: none; -moz-user-select: none; -webkit-user-drag: none;"/>
+
 <div id="menuContainer">
-<a class="icon" style="color:white; text-decoration: none;" onclick="location.href='index.html'"> <---- </a>
+
+<a class="icon" style="color:white; text-decoration: none;" onclick="location.href='../index.html'"></a>
+<div id='mainBar' style="line-height:140%;"><span style='margin-right:90%; ' onclick='location.href="../index.html"'>&#8617;</span><span style='position:fixed; margin-left:-45%; line-height:100%;' onclick='location.href="../index.html"' ontouchstart='location.href="../index.html"'>⌂</span><span style='line-height:120%; vertical-align:top; ' onclick='location.href="applauncher.html"' ontouchstart='location.href="applauncher.html"'>&#9992;</span> </div>
 </div>
 </body>
 </html>

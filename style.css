@@ -28,17 +28,48 @@ body[appLauncher]
   width: 100%;
   margin: 0;
   bottom:0;
+  
   z-index:5242;
   height: 3.25%;
-  font-size:27pt;
+  font-size:28pt;
   font-family: Lucida Console;
   text-align:center;
   color:#686868;
+  vertical-align: top;
   
 
 
 
 }
+/* Mobile */
+@media screen and (max-width: 800px){
+  #mainBar
+  {
+    padding-bottom:5.5%;
+
+  }
+  #dockContainer
+  {
+    margin-bottom:1.5%;
+
+  }
+}
+@media only screen 
+and (max-device-width : 800px) 
+and (orientation : landscape) {
+/* Styles */
+    #mainBar
+  {
+    padding-bottom:4.5%;
+
+  }
+  #dockContainer
+  {
+    margin-bottom:2.5%;
+
+  }
+}
+/**/
 .sBG
 {
 	background: url(city.jpg) no-repeat center center fixed; 
