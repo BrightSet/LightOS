@@ -8,7 +8,7 @@ function fatalError(message) {
 
 
         if (message != undefined) {
-            $("html").attr("style", "-webkit-transition:all 2s; -webkit-filter:grayscale(1)");
+            $("html").attr("style", "-webkit-transition:all 2s; -webkit-filter:grayscale(0)");
             setTimeout(function () {
                 $("#menuContainer").toggle();
                 $("#menuContainer").fadeIn(1000);
@@ -97,6 +97,7 @@ var sName = "base.js"
 var appJSON = "apps.json";
 var menuJSON = "menus.json";
 var widgetJSON = "widgets.json";
+var homeJSON = "home.json";
 var enableColor = false;
 var prevent = false;
 var menuSuccess = false;
@@ -108,7 +109,7 @@ $("div[id~='menu']").dblclick(function () {
 });
 document.oncontextmenu = function () {
     return false;
-};
+};/*
 if ($("html").length) {
 
     $.getJSON(appJSON)
@@ -126,7 +127,7 @@ if ($("html").length) {
         });
 }
 
-
+*/
 function hideThenGoToUrl(url) {
     document.getElementById('app').className += ' sROut';
     setTimeout(function () {
@@ -166,7 +167,7 @@ $(document).ready(function () {
     }
 
     //
-    $.getJSON(menuJSON, {
+    $.getJSON(homeJSON, {
         "title": "works",
         "color": "green",
         "href": "http://minecraft.com/"
@@ -175,28 +176,30 @@ $(document).ready(function () {
         var toggle = false;
 
         $.extend(json, localStorage.secondMenuJSON);
-        for (var i = 0; i < json.menus.length; i++) {
+        for (var i = 0; i < json.apps.length; i++) {
             //console.log(json.menus[i]);
 
             if (enableColor) {
-                $("#menuContainer").append("<div goTo='" + json.menus[i].href + "' onclick=\"document.getElementsByTagName('body')[0].className += ' sROut'; setTimeout(function(){window.location.href='" + json.menus[i].href + "'},1000);\" id='item" + json.menus[i].title + "' class=\"item " + json.menus[i].color + "\">" + json.menus[i].title + "</div>");
+                $("#menuContainer").append("<div goTo='apps/" + json.apps[i].name + "/index.html' onclick=\"document.getElementsByTagName('body')[0].className += ' sROut'; setTimeout(function(){window.location.href='" + json.apps[i].name + "/index.html'},1000);\" id='item" + json.apps[i].name + "' class=\"item " + "" /*json.menus[i].color*/ + "\">" + json.apps[i].name + "</div>");
             } else {
                 //$(".icon:first").addClass("itemhover");
                 //onclick=\"document.getElementsByTagName('body')[0].className += ' sROut'; setTimeout(function(){window.location.href='" + json.menus[i].href + "'},1000);\"
-                $("#dockContainer").append("<figure><div app='" + json.menus[i].href + "' class='app' id='m" + json.menus[i].title + "'></div>");
-                $("#dockContainer").append("<a><img onclick='setTimeout(function(){window.location.href=\"" + json.menus[i].href + "\";},0);' src='" + json.menus[i].icon + "' class='icon' ontouchstart='setTimeout(function(){window.location.href=\"" + json.menus[i].href + "\";},0);'/></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.menus[i].title + "</figcaption>----></figure>");
+                $("#dockContainer").append("<figure><div app='apps/" + json.apps[i].name + "/index.html' class='app' id='m" + json.apps[i].name + "'></div>");
+                $("#dockContainer").append("<a><img onclick='setTimeout(function(){window.location.href=\"apps/" + json.apps[i].name + "/index.html\";},0);' src='apps/" + json.apps[i].name + "/icon.png' class='icon' ontouchstart='setTimeout(function(){window.location.href=\"apps/" + json.apps[i].name + "/index.html\";},0);'/></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.apps[i].name + "</figcaption>----></figure>");
                 
                 //App Launcher
                 //--------------------------------------------------------------------------------------------------------------------------------
-                if (json.menus[i].title != "launcher") {
-                	$("#menuContainer").append("<figure><div draggable='false' app='" + json.menus[i].href + "' class='app' id='m" + json.menus[i].title + "'></div>");
-                	$("#menuContainer").append("<a><img onclick='setTimeout(function(){window.location.href=\"" + json.menus[i].href + "\";},0);' src='" + 	json.menus[i].icon + "' class='icon' ontouchstart='setTimeout(function(){window.location.href=\"" + json.menus[i].href + "\";},0);'/></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.menus[i].title + "</figcaption>----></figure>");
-                }
+                //if (json.menus[i].title != "launcher") {
+                	/*$("#menuContainer").append("<figure><div draggable='false' app='" + json.menus[i].href + "' class='app' id='m" + json.menus[i].title + "'></div>");
+                	$("#menuContainer").append("<a><img onclick='setTimeout(function(){window.location.href=\"" + json.menus[i].href + "\";},0);' src='" + 	json.menus[i].icon + "' class='icon' ontouchstart='setTimeout(function(){window.location.href=\"" + json.menus[i].href + "\";},0);'/></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.menus[i].title + "</figcaption>----></figure>");*/
+                    $("#menuContainer").append("<figure><div app='apps/" + json.apps[i].name + "/index.html' class='app' id='m" + json.apps[i].name + "'></div>");
+                $("#menuContainer").append("<a><img onclick='setTimeout(function(){window.location.href=\"apps/" + json.apps[i].name + "/index.html\";},0);' src='apps/" + json.apps[i].name + "/icon.png' class='icon' ontouchstart='setTimeout(function(){window.location.href=\"apps/" + json.apps[i].name + "/index.html\";},0);'/></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.apps[i].name + "</figcaption>----></figure>");
+                //}
                 $( ".icon" ).each(function( index ) {
                 	document.getElementsByClassName("icon")[index].style.backgroundColor = '#'+Math.random().toString(16).substr(-6);
                 });
                 //--------------------------------------------------------------------------------------------------------------------------------
-                $(document).ready(function () {
+                /*$(document).ready(function () {
                     if (json.menus[i].secondSide != undefined) {
                         //eval("var menu" + json.menus[i].title + " = new HexaFlip(document.getElementById('m" + json.menus[i].title + "'),    {        menu: [{value:'<a style=\"text-decoration:none;color:white;\" href=\"" + json.menus[i].href + "\">" + json.menus[i].title + "</a>', style:{backgroundColor: '#363636', WebkitBorderRadius:'0em', verticalAlign:'middle', fontFamily:'Helvetica', fontSize:'26pt', textAlign:'center', boxShadow: '1px 2px 5px #000'}, domEvents: { dblclick: function(e, face, cube) { console.log('hi') } } }, {value:'" + json.menus[i].secondSide + "', style:{backgroundColor: '#363636', verticalAlign:'middle', fontFamily:'Helvetica', fontSize:'26pt', textAlign:'center', boxShadow: '1px 2px 5px #000'} } ]},{ horizontalFlip: true, size: 150 });");
 
@@ -205,7 +208,7 @@ $(document).ready(function () {
 
                     }
 
-                });
+                });*/
 
                 //$("#menuContainer").append("<div goTo=\"" + json.menus[i].href + "\" id=\"item" + json.menus[i].title + "\" class=\"item " + "\">" + json.menus[i].title + "</div>");
                 $(".cube:offscreen").each(function (element) {
