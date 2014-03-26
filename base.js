@@ -101,10 +101,14 @@ var homeJSON = "home.json";
 var enableColor = false;
 var prevent = false;
 var menuSuccess = false;
-
 var url = window.location.pathname;
 var filename = url.substring(url.lastIndexOf('/')+1);
 console.log(filename);
+//App parsing thingy
+localStorage.home = '{"apps": [{"name":"mc-updates"},{"name":"settings"},{"name":"scratch"}';
+localStorage.home += ',{"name":"test"}';
+localStorage.home += ']}';
+var json = jQuery.parseJSON( localStorage.home );
 if(filename=="applauncher.html")
 {
     var homeJSON = "../home.json";
@@ -176,21 +180,17 @@ $(document).ready(function () {
     }
 
     //
-    $.getJSON(homeJSON, {
-        "title": "works",
-        "color": "green",
-        "href": "http://minecraft.com/"
-    }, function (json) {
+    //$.getJSON(homeJSON, {name: "test"})
+     //.done(function( json ) {
         //.success(function (json) {
         var toggle = false;
-
         $.extend(json, localStorage.secondMenuJSON);
         for (var i = 0; i < json.apps.length; i++) {
             //console.log(json.menus[i]);
-
             if (enableColor) {
                 $("#menuContainer").append("<div goTo='apps/" + json.apps[i].name + "/index.html' onclick=\"document.getElementsByTagName('body')[0].className += ' sROut'; setTimeout(function(){window.location.href='" + json.apps[i].name + "/index.html'},1000);\" id='item" + json.apps[i].name + "' class=\"item " + "" /*json.menus[i].color*/ + "\">" + json.apps[i].name + "</div>");
             } else {
+
                 //$(".icon:first").addClass("itemhover");
                 //onclick=\"document.getElementsByTagName('body')[0].className += ' sROut'; setTimeout(function(){window.location.href='" + json.menus[i].href + "'},1000);\"
                 $("#dockContainer").append("<figure><div app='apps/" + json.apps[i].name + "/index.html' class='app' id='m" + json.apps[i].name + "'></div>");
@@ -221,29 +221,15 @@ $(document).ready(function () {
                 });*/
 
                 //$("#menuContainer").append("<div goTo=\"" + json.menus[i].href + "\" id=\"item" + json.menus[i].title + "\" class=\"item " + "\">" + json.menus[i].title + "</div>");
-                $(".cube:offscreen").each(function (element) {
-                    $(this).before("<br>");
-                });
+               
 
 
 
             }
-            $(".item:first").addClass("itemhover");
-            $(".widget").toggle();
-
-
-            $(".widget").each(function (index, element) {
-                $(element).fadeIn(250);
-            });
-            setTimeout(function () {
-
-
-            }, 1000);
-
-
-
         }
-    })
+        /*}
+
+        })
         .fail(function (jqxhr, textStatus, error) {
             var err = textStatus + ", " + error;
             fatalError("Request Failed: " + err);
@@ -251,7 +237,7 @@ $(document).ready(function () {
         .success(function (jqxhr, textStatus, error) {
             menuSuccess = true;
         });
-    //
+    //*/
 
 
 
@@ -266,64 +252,6 @@ $(document).ready(function () {
         alert($("#menuContainer").height());
         $(".tile").height($("#menuContainer").height());
     });
-    jQuery.expr.filters.offscreen = function (el) {
-        return (
-            (el.offsetLeft + el.offsetWidth) < 0 || (el.offsetTop + el.offsetHeight) < 0 || (el.offsetLeft > window.innerWidth || el.offsetTop > window.innerHeight)
-        );
-    };
-
-
-    $(function () {
-
-    });
-    if ($("html").attr("ident") == "widgets") {
-
-
-        $.getJSON(widgetJSON)
-            .done(function (json) {
-                for (var i = 0; i < json.widgets.length; i++) {
-
-                    console.log($("#menuContainer").height());
-
-                    $("#widgetContainer").append("<div class='tile widget' id='widget" + i + "'>" + json.widgets[i].content + "</div>");
-
-                    $(".widget").height($("#menuContainer").height());
-                    //$(".widget").each(function( index, element ) {
-
-                    var margin = $("#menuContainer").height() + 25.5;
-
-                    $("#widget" + i).css({
-                        "margin-left": $(".widget:first").width() + $(".widget").width() * i
-                    });
-                    //});
-
-                    $(".widget:first").css({
-                        "margin-left": $(".widget").width() * i
-                    });
-                    $(".widget:last").css({
-                        "margin-left": $(".widget").width() * i
-                    });
-                    $("#widget" + json.widgets.length).css({
-                        "margin-left": $(".widget:first").width() * i + $(".widget").width() * i
-                    });
-                    $(".widget").css({
-                        "margin-top": "-" + $("#menuContainer").height() + "px"
-                    });
-                    $("#menuContainer").css({
-                        "margin-top": "0%"
-                    });
-                }
-
-
-            })
-            .fail(function (jqxhr, textStatus, error) {
-                var err = textStatus + ", " + error;
-                fatalError("Request Failed: " + err);
-            })
-            .success(function () {
-
-            });
-    }
 });
 
 function s4() {

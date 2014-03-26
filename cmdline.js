@@ -70,16 +70,18 @@ function validate(e) {
                 executeFile("./fs/" + cmd.value.split(" ")[0], s2);
             }*/
             
-    var jqxhr = $.ajax( s.split(" ")[0] )
+    var jqxhr = $.ajax("fs/" + s.split(" ")[0] )
   .done(function() {
     var s1 = location.href;
     var s2 = s1.replace("file://", "");
     var s3 = s2.replace("cmdline.html","")
-    location.href = "forwardos://dofile('" + s3 + s.split(" ")[0] + "')";
+    //Lua: location.href = "forwardos://dofile('" + s3 + s.split(" ")[0] + "')";
+    executeFile("fs/" + s.split(" ")[0]);
   })
   .fail(function() {
     document.getElementById("outputfield").innerHTML += "No such file or directory.<br>";
         document.getElementById("outputfield").innerHTML += s + "<br>";
+
   })
   .always(function() {
   });

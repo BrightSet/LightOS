@@ -1,6 +1,5 @@
 {
 "apps": [
-	{"name":"test"},
 	{"name":"mc-updates"},
 	{"name":"settings"},
 	{"name":"scratch"}
