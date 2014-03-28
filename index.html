@@ -80,12 +80,11 @@ NOT FOR RESALE<br>
         <div id="alertdiv">You don't have JavaScript enabled. It's required -.-</div>
     </noscript>
     <div id='homescreen'>
+    <h1>lightOS</h1>
     <!--<h1 id='auo' style="color:white;" onclick="$(this).slideUp(500);" ontouchend="$(this).slideUp(500);">AUTHORIZED USE ONLY</h1>-->
-        <div style="font-family: Helvetica Neue, Helvetica, Arial;
-	font-weight: 200;
-	font-size: 26pt; color:black;">
+        <div style="">
             <!--<h1 style="color:grey; text-shadow:2px 2px 6px #000f">apps</h1>-->
-            <h1>Clock<sub>gmt</sub></h1>
+            <h2>Clock</h2>
             <div id="clock"></div>
             <script>
             localStorage.weathercity = localStorage.weathercity;
@@ -113,9 +112,9 @@ NOT FOR RESALE<br>
 
         </div>
         <div id="weather" style="">
-        <h1 style="color:black;">Weat<a href="forwardos://print('Hello, from the h')" style='text-decoration: none; color:black;'>h</a>er<sub id='wcitydisplay'>vienna</sub></h1>
-        <p>weather data from <a href="http://openweathermap.org/">openweathermap.org</a></p>
-        <img id="weather-icon" style="width: 5%; height: 5%; float: left;" />
+        <h2>Weather</h2>
+        <span style='float:left;' id='wcitydisplay'>vienna</span><br>
+        <img id="weather-icon" style="width: 50pt; height: 50pt; float: left;" />
         <h2 id="weather-temp" style="float:left;"></h2>
         <h2 id="weather-temp-more" style="float:left;"></h2>
          <h2 id="weather-temp-celsius" style="float:left;">&nbsp;°C</h2>
@@ -149,6 +148,15 @@ NOT FOR RESALE<br>
                 });
                 
             </script>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+                    <span style='font-size: small;'>weather data from <a href="http://openweathermap.org/">openweathermap.org</a></span>
+
         </div>
         <div id="mCBg" class="sBG">&nbsp;</div>
         
@@ -158,7 +166,7 @@ NOT FOR RESALE<br>
     </div>
     <div id="dockContainer" name="menu">
     </div>
-<div id='mainBar' style="line-height:140%;"><span style='margin-right:90%; '>&#8617;</span><span style='position:fixed; margin-left:-45%; line-height:100%;' onclick='location.href="index.html"' ontouchstart='location.href="index.html"'>⌂</span><span style='line-height:120%; vertical-align:top; ' onclick='location.href="apps/applauncher.html"' ontouchstart='location.href="apps/applauncher.html"'>&#9992;</span> </div>
-</body>
 
+</body>
+<div id='mainBar' style="line-height:140%;"><span style='margin-right:90%; '>&#8617;</span><span style='position:fixed; margin-left:-45%; line-height:100%;' onclick='location.href="index.html"' ontouchstart='location.href="index.html"'>⌂</span><span style='line-height:120%; vertical-align:top; ' onclick='location.href="apps/applauncher.html"' ontouchstart='location.href="apps/applauncher.html"'>&#9992;</span> </div>
 </html>

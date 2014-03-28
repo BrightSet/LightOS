@@ -1,2 +1,53 @@
-<script src="../applib.js"></script>
-<h2>General Settings</h2><br><input id='keyControl' onclick='localStorage.keyControl = this.checked;' type='checkbox' id='keyControl'> Key control<br><br><h2>Widgets</h2><h3>Weather</h3><label>City: </label><input id='weather-city' onblur='localStorage.weathercity=this.value; localStorage.isWeatherSet = true;' alt='formated: city,countrycode' /><br><br><h2>License</h2>Copyright 2014.<br><br>All rights reserved.<br> <script>document.getElementById('keyControl').checked = localStorage.keyControl; console.log(localStorage.keyControl);</script>
+<html class='noMainBar'>
+<head>
+<script src="../applib.js">
+<script src="jquery-1.10.2.min.js"></script>
+</script>
+</head>
+<body onload="load_()">
+<h2>
+  General Settings
+</h2>
+<br>
+<input id='test' onclick='localStorage.test = this.checked;' type='checkbox'>
+Test
+<script>
+var i, checkboxes = document.querySelectorAll('input[type=checkbox]');
+
+function save() {
+    for (i = 0; i < checkboxes.length; i++) {
+        localStorage.setItem(checkboxes[i].value, checkboxes[i].checked); 
+    }
+}
+
+function load_() {
+    for (i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = localStorage.getItem(checkboxes[i].value) === 'true' ? true:false;
+    }
+} 
+</script>
+<br>
+<br>
+<h2>
+  Widgets
+</h2>
+<h3>
+  Weather
+</h3>
+<label>
+  City: 
+</label>
+<input id='weather-city' onblur='if(this.value != "") {localStorage.weathercity=this.value; localStorage.isWeatherSet = true;}' alt='city,countrycode' />
+<br>
+<br>
+<h2>
+  License
+</h2>
+Copyright Brightset 2014.
+<br>
+<br>
+All rights reserved.
+<br>
+<button style="bottom:12pt; position:fixed;" onclick="save(); location.href='../index.html';">Save and close</button>
+</body>
+</html>

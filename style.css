@@ -1,6 +1,11 @@
-html[home]:not(#mainBar), body[home]:not(#mainBar) {
+html[home], body[home] {
   	height: 100%;
+    margin: 0;
     /*margin:12pt;*/
+}
+body {
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
 }
 .cursor
 {
@@ -23,6 +28,7 @@ body[appLauncher]
 }
 #mainBar
 {
+  margin: 0 !important;
   background-color: rgba(0,0,0,0.25);
   position: fixed;
   width: 100%;
