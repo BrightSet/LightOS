@@ -5,7 +5,8 @@
 <meta charset="utf-8">
 <title>forWardOS | Command-line</title>
 <div id="imports">
-<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
+
 </div>
 <style>
 body
@@ -23,7 +24,8 @@ position: fixed;
 width:100%;
 background-color: rgba(0,0,0,0);
 color:white;
-font-family: Courier; 
+font-family: Menlo,Courier; 
+font-size: 12pt;
 outline: none;
 }
 #outputfield
@@ -34,16 +36,17 @@ min-height: 100%;
 position: absolute;
 background-color: rgba(0,0,0,0);
 color:white;
-font-family: Courier; 
+font-family: Menlo,Courier; 
 outline: none;
 }
 </style>
 </head>
 <body>
-<div id="outputfield" onfocus="this.blur();" disabled="true">
+<div id="outputfield" disabled="true">
 
 </div>
-<input id="cmdfield" onblur="this.focus();"/>
+<input id="cmdfield" onblur="this.focus();preventDefault();" />
+<script type="text/javascript" src="filelib.js"></script>
 <script src="cmdline.js"></script>
 </body>
 

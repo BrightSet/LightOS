@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <title>App Launcher</title>
 <meta charset="utf-8">
-    <script type="text/javascript" src="../jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
     <link rel="stylesheet" href="../style.css" type="text/css" />
     <script type="text/javascript" src="../base.js"></script>
-    <style type="text/css">*:not(.icon) {margin: 0} body,html { background: url(../city.jpg) no-repeat center center fixed; 
+    <style type="text/css">/**:not(.icon) {margin: 0} body,html { background: url(../city.jpg) no-repeat center center fixed; 
     -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;}</style>
+  background-size: cover;}*/ .icon { width: 10%;height:10%; }</style>
 </head>
 
 <body appLauncher>
+
 <br>
 <!-- Preloader -->
-
 <div id="preloader">
 <noscript>
 <div id="statusError" >&nbsp;</div>
@@ -35,10 +35,14 @@
 	//]]>
 </script> 
 
-<div id="menuContainer">
+<div id="menuContainer" style="z-index:1000;position:fixed;">
 
 <a class="icon" style="color:white; text-decoration: none;" onclick="location.href='../index.html'"></a>
 <div id='mainBar' style="line-height:140%;"><span style='margin-right:90%; ' onclick='location.href="../index.html"'>&#8617;</span><span style='position:fixed; margin-left:-45%; line-height:100%;' onclick='location.href="../index.html"' ontouchstart='location.href="../index.html"'>⌂</span><span style='line-height:120%; vertical-align:top; ' onclick='location.href="applauncher.html"' ontouchstart='location.href="applauncher.html"'>&#9992;</span> </div>
 </div>
+<video muted loop style="position: absolute;bottom: 0px;right: 0px;min-width: 100%;min-height: 100%;width: auto;height: auto;z-index: -1000;overflow: hidden;" autoplay>
+<source src="../background.mp4" type="video/mp4">
+ </video>
 </body>
+
 </html>

@@ -2,6 +2,7 @@ html[home], body[home] {
   	height: 100%;
     margin: 0;
     /*margin:12pt;*/
+    overflow: hidden;
 }
 body {
    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
@@ -108,7 +109,7 @@ and (orientation : landscape) {
 	height: 5%;
 	z-index: 10;
  /*   -webkit-border-radius: 100px;*/
-    background-color: #fff;
+    /*background-color: #fff;
     /*padding: 10px;*/
     
 }

@@ -83,7 +83,7 @@ $(document).ready(function () {
             }, "slow").addClass('visible');
         }
     });
-    window.setTimeout(function () { ready = true}, 1300);
+    window.setTimeout(function () { ready = true}, 1);
 });
 $(document).keydown(function (e) {
    if(e.altKey && !ready)
@@ -206,7 +206,7 @@ $(document).ready(function () {
                 //$(".icon:first").addClass("itemhover");
                 //onclick=\"document.getElementsByTagName('body')[0].className += ' sROut'; setTimeout(function(){window.location.href='" + json.menus[i].href + "'},1000);\"
                 $("#dockContainer").append("<figure><div app='apps/" + json.apps[i].name + "/index.html' class='app' id='m" + json.apps[i].name + "'></div>");
-                $("#dockContainer").append("<a><img onclick='setTimeout(function(){window.location.href=\"apps/" + json.apps[i].name + "/index.html\";},0);' src='apps/" + json.apps[i].name + "/icon.png' class='icon' ontouchstart='setTimeout(function(){window.location.href=\"apps/" + json.apps[i].name + "/index.html\";},0);'/></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.apps[i].name + "</figcaption>----></figure>");
+                $("#dockContainer").append("<a><img onclick='setTimeout(function(){window.location.href=\"apps/" + json.apps[i].name + "/index.html\";},0);' src='apps/" + json.apps[i].name + "/icon.png' style='width:5%;height:5%;' class='icon' ontouchstart='setTimeout(function(){window.location.href=\"apps/" + json.apps[i].name + "/index.html\";},0);'/></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.apps[i].name + "</figcaption>----></figure>");
                 
                 //App Launcher
                 //--------------------------------------------------------------------------------------------------------------------------------
@@ -217,9 +217,10 @@ $(document).ready(function () {
                    $("#menuContainer").append("<figure><div app='./" + json.apps[i].name + "/index.html' class='app' id='m" + json.apps[i].name + "'></div>");
                 $("#menuContainer").append("<a><img onclick='setTimeout(function(){window.location.href=\"./" + json.apps[i].name + "/index.html\";},0);' src='./" + json.apps[i].name + "/icon.png' class='icon' ontouchstart='setTimeout(function(){window.location.href=\"./" + json.apps[i].name + "/index.html\";},0);'/></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.apps[i].name + "</figcaption>----></figure>");
                 }//}
-                $( ".icon" ).each(function( index ) {
+                /*$( ".icon" ).each(function( index ) {
                 	document.getElementsByClassName("icon")[index].style.backgroundColor = '#'+Math.random().toString(8).substr(-6);
                 });
+                */
                 //--------------------------------------------------------------------------------------------------------------------------------
                 /*$(document).ready(function () {
                     if (json.menus[i].secondSide != undefined) {
@@ -262,6 +263,9 @@ $(document).ready(function () {
     });
     Mousetrap.bind('command+shift+f', function (e) {
         launchFullscreen(document.documentElement);
+    });
+    Mousetrap.bind('# + #', function (e) {
+        $('img').css({"-webkit-filter":"blur(10px)"});
     });
 });
 

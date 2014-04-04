@@ -28,7 +28,7 @@ function include(p) {
 
     document.body.appendChild(js);
 }
-function executeFile(file, args)
+/*function executeFile(file, args)
 {
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, true);
@@ -47,17 +47,40 @@ function executeFile(file, args)
     }
     rawFile.send(null);
 }
-executeFile("bi.js");
+executeFile("bi.js");*/
+function puts(s) {
+    out.innerHTML += s;
+}
+function executeFile(file,args) {
+    eval(readFile(file) + "main()");
+}
+function getKeyCode(event) {
+   event = event || window.event;
+   return event.keyCode;
+}
+function clearTerm() {
+    out.innerHTML = "";
+}
+writeFile("edit","function main(args) { var fname = prompt(\"Please enter the name of the file, that you wan't to edit\",\"\");  var content = prompt(\"\",readFile(fname) ); writeFile(fname,content); }");
 function validate(e) {
 
     
         var s = cmd.value;
+        cmd.value = "";
         if(s == "reboot")
         {
             location.href = "index.html";
+            cmd.value = "";
         }
         else
-        {/*
+        {
+            executeFile(s);
+            cmd.value = "";
+        }
+
+        //else
+        //{/*
+            /*
             if(!s.contains(".js"))
             {
                 s += ".js"
@@ -68,7 +91,7 @@ function validate(e) {
             {
                 var s2 = s.split(" ");
                 executeFile("./fs/" + cmd.value.split(" ")[0], s2);
-            }*/
+            }*
             
     var jqxhr = $.ajax("fs/" + s.split(" ")[0] )
   .done(function() {
@@ -89,7 +112,7 @@ function validate(e) {
             
         }
     
-    cmd.value = "";
+    cmd.value = "";*/
     
 }
 
