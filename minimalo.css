@@ -1,0 +1,20 @@
+.icon {
+content: none !important;
+border:solid black 1px !important;
+margin-left: 12pt !important;
+}
+body {
+	background: #fff !important;
+}
+video {
+	display:none;
+}
+img {
+	display:none;
+}
+#homescreen {
+	display:none;
+}
+.appName {
+	display:inline !important;
+}

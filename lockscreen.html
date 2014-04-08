@@ -1,54 +1,77 @@
-w<!DOCTYPE HTML>
-<html lockscreen>
-<head>
-<meta charset="utf-8">
-<title>lockscreen</title>
-<link rel="stylesheet" href="style.css" type="text/css" />
-<link rel="stylesheet" href="hexaflip.css" type="text/css" />
-
-<script src="jquery-1.10.2.min.js" type="text/javascript"></script>
-</head>
-
-<body lockscreen>
-<h1 id='time' style="text-align:center; font-size:72pt; color:white; font-family: Helvetica Neue; font-weight: 200;">
-<script>
-var currentTime = new Date()
-	var hours = currentTime.getHours()
-	var minutes = currentTime.getMinutes()
-
-	if (minutes < 10)
-	minutes = "0" + minutes
-
-	document.getElementById("time").innerHTML = hours + ":" + minutes;
-</script>
-</h1>
-<script src="hexaflip.js" type="text/javascript"></script>
-<div id="unlock" style="margin:0 auto; background-color:rgba(0,0,0,0)" ondrag="alert('hey!');"></div>
-<button style="margin-left:50%; width:1%" onclick="unlock()"> </button>
-<script>
-
-var uCube = new HexaFlip(document.getElementById("unlock"), {
-
-unlock:[{
-value: "pull up and press to unlock", 
-style:{width:"100%", backgroundColor:"rgba(0,0,0,1)", fontSize:"24pt", verticalAlign:"middle", fontFamily:"Helvetica Neue", fontWeight:"100"}
-},
-{
-value: " ", 
-style:{width:"100%", backgroundColor:"rgba(0,0,0,1)", fontSize:"36pt", verticalAlign:"middle"},
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title></title>
+  
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
     
-},
-
-],
-
-});
-function unlock() {
-	if(uCube.getValue().join(' ') === " ")
-	{
-		location.href = "index.html";
-	}
+  <style type="text/css">
+    #keys {
+margin: 0;
+line-height:5%;
+margin: 45%;
+width:100%;
+height:100%;
 }
+#keys button,div {
+    position:static;
+    border:0;
+    width:5%;
+    height:5%;
+    font-size:12pt;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-weight:300;
+    background: rgba(255,255,255,0.5);
+}
+
+  </style>
+  
+
+
+<script type="text/javascript">//<![CDATA[ 
+$(window).load(function(){
+var num = "";
+function type(i) {
+    num += "" + i;
+    $("#typed").text(num);
+    if(num == "25565") {
+    	location.href='index.html';
+    }
+}
+function del() {
+    num = num.substring(0, num.length - 1);
+    $("#typed").text(num);
+}
+$("#keys button:nth-of-type(1)").click(function () { type(1) });
+$("#keys button:nth-of-type(2)").click(function () { type(2) });
+$("#keys button:nth-of-type(3)").click(function () { type(3) });
+$("#keys button:nth-of-type(4)").click(function () { type(4) });
+$("#keys button:nth-of-type(5)").click(function () { type(5) });
+$("#keys button:nth-of-type(6)").click(function () { type(6) });
+$("#keys button:nth-of-type(7)").click(function () { type(7) });
+$("#keys button:nth-of-type(8)").click(function () { type(8) });
+$("#keys button:nth-of-type(9)").click(function () { type(9) });
+$("#keys button:nth-of-type(10)").click(function () { type(0) });
+$("#keys button:nth-of-type(11)").click(function () { del() });
+
+});//]]>  
+
 </script>
 
-</body>
-</html>
+
+</head>
+<body>
+  <div id="keys">
+    <div id="typed" style="margin-bottom:12pt;"></div>
+    <button>1</button><button>2</button><button>3</button><br>
+    <button>4</button><button>5</button><button>6</button><br>
+    <button>7</button><button>8</button><button>9</button><br>
+    <button>0</button><button>&lt;</button>
+</div>
+
+  
+
+
+
+
+
+</body></html>

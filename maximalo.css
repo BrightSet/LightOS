@@ -3,10 +3,23 @@ html[home], body[home] {
     margin: 0;
     /*margin:12pt;*/
     overflow: hidden;
+
+-webkit-user-select: none; /* Chrome/Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* IE10+ */
+
+/* Rules below not implemented in browsers yet */
+-o-user-select: none;
+user-select: none;
+
 }
 body {
    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
    font-weight: 300;
+}
+img
+{
+  -webkit-user-drag: none;
 }
 .cursor
 {
@@ -23,6 +36,16 @@ html[lockscreen], body[lockscreen] {
   	-moz-background-size: cover;
   	-o-background-size: cover;
   	background-size: cover;
+}
+#title
+{
+  float: right;
+  margin-right: 24pt;
+}
+.widget
+{
+  float: right;
+  padding-right: 122pt;
 }
 body[appLauncher]
 {
@@ -42,10 +65,6 @@ body[appLauncher]
   text-align:center;
   color:#686868;
   vertical-align: top;
-  
-
-
-
 }
 /* Mobile */
 @media screen and (max-width: 800px){

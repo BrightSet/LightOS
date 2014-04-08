@@ -1,7 +1,7 @@
 <html class='noMainBar'>
 <head>
 <script src="../applib.js">
-<script src="jquery-1.10.2.min.js"></script>
+<script src="../jquery-1.10.2.min.js"></script>
 </script>
 </head>
 <body onload="load_()">
@@ -9,15 +9,23 @@
   General Settings
 </h2>
 <br>
+Test:
 <input id='test' onclick='localStorage.test = this.checked;' type='checkbox'>
-Test
+<br>
+Theme:
+<input onblur='if(this.value != "") { localStorage.themename=this.value; }' id="themename" placeholder="Type in the name of your theme"></input>
 <script>
+
+
+
 var i, checkboxes = document.querySelectorAll('input[type=checkbox]');
+var t, textFields = document.querySelectorAll('input[type=checkbox]');
 
 function save() {
     for (i = 0; i < checkboxes.length; i++) {
         localStorage.setItem(checkboxes[i].value, checkboxes[i].checked); 
     }
+
 }
 
 function load_() {
@@ -37,7 +45,7 @@ function load_() {
 <label>
   City: 
 </label>
-<input id='weather-city' onblur='if(this.value != "") {localStorage.weathercity=this.value; localStorage.isWeatherSet = true;}' alt='city,countrycode' />
+<input placeholder='City, Country Code' id='weather-city' onblur='if(this.value != "") {localStorage.weathercity=this.value; localStorage.isWeatherSet = true;}' alt='city,countrycode' />
 <br>
 <br>
 <h2>

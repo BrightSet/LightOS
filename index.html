@@ -3,11 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="stylesheet" href="maximalo.css" type="text/css" />
     <link rel="stylesheet" href="animate.min.css" type="text/css" />
     <meta name="viewport" content="width=device-width, 
     minimum-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" href="jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" type="text/css" />
+    <link rel="stylesheet" id='themelink' href="" type="text/css" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <script src="jquery-1.11.0.min.js" type="text/javascript"></script>
@@ -25,7 +26,7 @@
     <link href="preloader.css" rel="stylesheet" />
     <script src="bootstrap/js/bootstrap.min.js"></script>
 
-    <title>lightOS | Beta 1.0.0</title>
+    <title>lightOS | Beta 1.1.0</title>
 </head>
 
 <body id='body' home class="sBG" onload='$("#dockContainer, .background, #mCBg").hide(); startTime();mok() '>
@@ -63,6 +64,15 @@ NOT FOR RESALE<br>
 		})
 	//]]>
 </script> 
+<div id="cursor" style="position:fixed;z-index: 10000;pointer-events:none;"><img style="width:19pt;height:25pt;pointer-events:none;" src="theCursor.png" /></div>
+<script>
+$(document).bind('mousemove', function(e){
+    $('#cursor').css({
+       left:  e.pageX,
+       top:   e.pageY
+    });
+});
+</script>
     <noscript>
         <style type="text/css">
             * {
@@ -82,13 +92,12 @@ NOT FOR RESALE<br>
         </style>
         <div id="alertdiv">You don't have JavaScript enabled. It's required -.-</div>
     </noscript>
-    <div id='homescreen' style="">
-    <h1>lightOS</h1>
+    <div id='homescreen'>
+    <h1 id="title">lightOS</h1>
     <!--<h1 id='auo' style="color:white;" onclick="$(this).slideUp(500);" ontouchend="$(this).slideUp(500);">AUTHORIZED USE ONLY</h1>-->
-        <div style="">
-            <!--<h1 style="color:grey; text-shadow:2px 2px 6px #000f">apps</h1>-->
-            <h2>Clock</h2>
-            <div id="clock"></div>
+        <div id='clock' class="widget">
+        <h2>Clock</h2>
+            <div id='time'></div>
             <script>
             localStorage.weathercity = localStorage.weathercity;
                 function startTime() {
@@ -99,7 +108,7 @@ NOT FOR RESALE<br>
                     // add a zero in front of numbers<10
                     m = checkTime(m);
                     s = checkTime(s);
-                    document.getElementById('clock').innerHTML = h + ":" + m + ":" + s;
+                    document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
                     t = setTimeout(function () {
                         startTime()
                     }, 500);
@@ -112,9 +121,8 @@ NOT FOR RESALE<br>
                     return i;
                 }
             </script>
-
         </div>
-        <div id="weather" style="">
+        <div id="weather" class='widget'>
         <h2>Weather</h2>
         <span style='float:left;' id='wcitydisplay'>vienna</span><br>
         <img id="weather-icon" style="width: 50pt; height: 50pt; float: left;" />
@@ -152,7 +160,7 @@ NOT FOR RESALE<br>
                 
             </script>
           
-                    <span style='position:absolute;top:130%;margin-left:-109pt;font-size: small;'>weather data from <a href="http://openweathermap.org/">openweathermap.org</a></span>
+                    <div id='weatherCopyright'><span>openweathermap.org</a></span></div>
 
         </div>
         <!---<div id="mCBg" class="sBG">></div><video loop autoplay>
@@ -163,7 +171,7 @@ NOT FOR RESALE<br>
         </div>
         <script src="hexaflip.js"></script>
     </div>
-    <div id="dockContainer" name="menu">
+    <div id="dockContainer" style='overflow-x: scroll;white-space: nowrap;' name="menu">
     </div>
 
 </body>
