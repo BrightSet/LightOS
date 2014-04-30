@@ -1,0 +1,66 @@
+<html class='noMainBar'>
+<head>
+<script src="base.js"></script>
+<link rel="stylesheet" type="text/css" href="maximalo.css" />
+<style>*{font-family:Helvetica;}</style>
+<script src="../jquery-1.10.2.min.js"></script>
+
+</head>
+<body onload="load_()">
+<h2>
+  General Settings
+</h2>
+Alternate stylesheet(for advanced users):
+<input onblur='if(this.value != "") { localStorage.themename=this.value; }' id="themename" placeholder="Type in the name of your theme"></input>
+<script>
+
+
+
+var i, checkboxes = document.querySelectorAll('input[type=checkbox]');
+var t, textFields = document.querySelectorAll('input[type=checkbox]');
+
+function save() {
+    for (i = 0; i < checkboxes.length; i++) {
+        localStorage.setItem(checkboxes[i].value, checkboxes[i].checked);
+    }
+
+}
+
+function load_() {
+    for (i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = localStorage.getItem(checkboxes[i].value) === 'true' ? true:false;
+    }
+}
+</script>
+<br>
+<br>
+<h2>
+  Widgets
+</h2>
+<h3>
+  Weather
+</h3>
+<label>
+  City:
+</label>
+<input placeholder='City, Country Code' id='weather-city' onblur='if(this.value != "") {localStorage.weathercity=this.value; localStorage.isWeatherSet = true;}' alt='city,countrycode' />
+<br>
+<br>
+<h2>
+  Reset
+</h2>
+<button onclick="reset()">Reset</button>
+<br>
+<br>
+<h2>
+  License
+</h2>
+Copyright Brightset 2014.
+<br>
+All rights reserved.
+<br>
+<br>
+Using <a href='https://github.com/designmodo/Flat-UI'>FlatUI - Design Framework</a><br>
+<button style="bottom:12pt; position:fixed;margin:0;" onclick="save(); location.href='index.html';">Save and close</button>
+</body>
+</html>

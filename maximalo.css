@@ -4,7 +4,7 @@ html[home], body[home] {
     /*margin:12pt;*/
     overflow: hidden;
 
--webkit-user-select: none; /* Chrome/Safari */        
+-webkit-user-select: none; /* Chrome/Safari */
 -moz-user-select: none; /* Firefox */
 -ms-user-select: none; /* IE10+ */
 
@@ -14,7 +14,7 @@ user-select: none;
 
 }
 body {
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
    font-weight: 300;
 }
 img
@@ -31,7 +31,7 @@ html[appLauncher], body[appLauncher] {
 html[lockscreen], body[lockscreen] {
     margin: 0;
     padding: 0;
-    background: url(buildings.jpg) no-repeat center center fixed; 
+    background: url(buildings.jpg) no-repeat center center fixed;
   	-webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;
@@ -79,8 +79,8 @@ body[appLauncher]
 
   }
 }
-@media only screen 
-and (max-device-width : 800px) 
+@media only screen
+and (max-device-width : 800px)
 and (orientation : landscape) {
 /* Styles */
     #mainBar
@@ -97,7 +97,7 @@ and (orientation : landscape) {
 /**/
 .sBG
 {
-	background: url(city.jpg) no-repeat center center fixed; 
+	background: url(city.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -117,11 +117,25 @@ and (orientation : landscape) {
 }
 .message
 {
-	background-color:white; 
+	background-color:white;
 	width:100%;
-	
-}
 
+}
+button
+{
+    border:0;
+    color:#CCC;
+    border-radius:5px;
+    font-size:14pt;
+    color: #333333;
+    background: #CCCCCC;
+}
+button:active
+{
+    border:0;
+    -webkit-transform:scale(0.9);
+    -moz-transform:scale(0.9);
+}
 .icon
 {
 	width: 5%;
@@ -130,7 +144,7 @@ and (orientation : landscape) {
  /*   -webkit-border-radius: 100px;*/
     /*background-color: #fff;
     /*padding: 10px;*/
-    
+
 }
 .appBG
 {
@@ -140,10 +154,10 @@ and (orientation : landscape) {
 	z-index: 0;
 	position: absolute;
 	bottom: 0;
-	
-	
-	
-	
+
+
+
+
 }
 #homescreen
 {
@@ -227,14 +241,14 @@ cursor: default;
 display: inline-block;
     margin: 10px;
     /*float: left;*/
-    
+
 }
 
 sup {
   /* Move the superscripted text up */
   top: -0.5em;
 }
- 
+
 sub {
   /* Move the subscripted text down, but only
      half as far down as the superscript moved up */
@@ -305,7 +319,7 @@ z-index: 3;
     -webkit-transform: scale(0.9);
     -moz-transform: scale(0.9);
     -o-transform: scale(0.9);
-    
+
 }
 .tile
 {

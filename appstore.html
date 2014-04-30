@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="jquery-1.11.0.min.js"></script>
+<script src="filelib.js"></script>
+<script src="base.js"></script>
+<link rel="stylesheet" type="text/css" href="maximalo.css" />
+<style>
+*
+{
+  font-family:Helvetica;
+  transition: all 0.5s;
+}
+</style>
+<script>
+$.ajax({
+type: "GET",
+url: "http://nicelikebagels.tk/lightos-appstore/apps.json?callback=0",
+dataType: "script"
+});
+
+window.setTimeout(function () {load();},1000);
+function load() {
+var index;
+
+for (index = 0; index < asjson.apps.length; ++index) {
+    document.getElementById("apps").innerHTML += "<div style='background-color:gray;'>";
+    document.getElementById("apps").innerHTML += JSON.parse(asjson.apps[index].json.replace(/'/g,"\"")).name;
+    document.getElementById("apps").innerHTML += "<button id='" + JSON.parse(asjson.apps[index].json).name + "' index='" + index + "' class='installButton' onclick='' style='margin-left:2%;'>Install</button>";
+
+    document.getElementById("apps").innerHTML += "</div>";
+    if(index != asjson.apps.length - 1) document.getElementById("apps").innerHTML += "";
+}
+$(".installButton").click(function () {
+  writeFile("apps/" + JSON.parse(asjson.apps[$(this).attr("index")].json.replace(/'/g,"\"")).name + "/index.html", asjson.apps[ $(this).attr("index") ].files["index.html"]);
+  writeFile("apps/" + JSON.parse(asjson.apps[$(this).attr("index")].json.replace(/'/g,"\"")).name + "/icon", asjson.apps[ $(this).attr("index") ].files["icon"]);
+  localStorage.installedApps += asjson.apps[ $(this).attr("index") ].json + ",";
+  //localStorage.installedApps += ",";
+  //localStorage.installedApps = localStorage.installedApps.replace(/,$/,'');
+  alert("Installed " + JSON.parse(asjson.apps[$(this).attr("index")].json.replace(/'/g,"\"")).name);
+});
+}
+</script>
+</head>
+<body>
+<div id="apps">
+
+</div>
+<button style="position:fixed;bottom:0;" onclick="localStorage.newApp = 'true';location.href='index.html';">Back</button>
+</body>
+</html>

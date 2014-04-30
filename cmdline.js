@@ -61,10 +61,10 @@ function getKeyCode(event) {
 function clearTerm() {
     out.innerHTML = "";
 }
-writeFile("edit","function main(args) { var fname = prompt(\"Please enter the name of the file, that you wan't to edit\",\"\");  var content = prompt(\"\",readFile(fname) ); writeFile(fname,content); }");
+writeFile("edit","function main(args) { var fname = prompt(\"Please enter the name of the file, that you want to edit\",\"\");  var content = prompt(\"\",readFile(fname) ); writeFile(fname,content); }");
 function validate(e) {
 
-    
+
         var s = cmd.value;
         cmd.value = "";
         if(s == "reboot")
@@ -92,7 +92,7 @@ function validate(e) {
                 var s2 = s.split(" ");
                 executeFile("./fs/" + cmd.value.split(" ")[0], s2);
             }*
-            
+
     var jqxhr = $.ajax("fs/" + s.split(" ")[0] )
   .done(function() {
     var s1 = location.href;
@@ -109,10 +109,9 @@ function validate(e) {
   .always(function() {
   });
 
-            
-        }
-    
-    cmd.value = "";*/
-    
-}
 
+        }
+
+    cmd.value = "";*/
+
+}
