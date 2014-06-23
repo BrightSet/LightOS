@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html home="" ><head>
+    <meta charset="utf-8" >
+
+    <script src="filelib.js" ></script>
+    <link rel="stylesheet" href="maximalo.css" type="text/css" >
+    <link rel="stylesheet" href="animate.min.css" type="text/css" >
+    <meta name="viewport" content="width=device-width,
+    minimum-scale=1.0, maximum-scale=1.0" >
+    <link rel="stylesheet" id="themelink" href="" type="text/css" >
+    <meta name="apple-mobile-web-app-capable" content="yes" >
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" >
+    <script src="jquery-1.11.0.min.js" type="text/javascript" ></script>
+    <link rel="stylesheet" href="jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" type="text/css" >
+    <script src="jquery-ui-1.10.4.custom.min.js" >
+    <script src="xLang.js" type="text/javascript"></script>
+    <script src="mousetrap.min.js" type="text/javascript" ></script>
+    <script src="jquery.playSound.js" type="text/javascript" ></script>
+    <link rel="stylesheet" href="hexaflip.css" type="text/css" >
+    <!--<link rel="stylesheet" href="default.css" type="text/css" />-->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,400italic" rel="stylesheet" type="text/css" >
+    <link rel="apple-touch-icon-precomposed" href="icon.png" >
+    <link rel="apple-touch-startup-image" href="splash.png" >
+    <link href="preloader.css" rel="stylesheet" >
+    <script src="base.js" type="text/javascript" ></script>
+    <title>lightOS | Beta 1.1.0</title>
+</head>
+
+<body id="body" home="" class="sBG" onload="$(" #dockcontainer,="" .background,="" #mcbg").hide();="" starttime();mok()="" "="" style="" >
+<video muted="" loop="" style="position:absolute; bottom:0; right:0; min-width:100%; min-height:100%; width:auto; height:auto; z-index:-1000; overflow:hidden; " autoplay >
+<source src="background.mp4" type="video/mp4" ></source>
+<source src="background.ogv" type="video/ogg; codecs=" theora,="" vorbis""="" ></source>
+</video>
+
+<!----
+<script>
+$(function() {
+$( "#testWindow" ).dialog({
+autoOpen: true,
+show: {
+effect: "fade",
+duration: 1000
+},
+hide: {
+effect: "fade",
+duration: 1000
+}
+});
+
+});
+</script>
+<div id="testWindow"><object data="http://mojang.com/" style="width:100%;height:100%;"></object></div>
+<!---->
+ <script>
+ $(function() {
+$( "#tempAppStorage" ).dialog({
+autoOpen: false,
+show: {
+effect: "fade",
+duration: 1000
+},
+hide: {
+effect: "fade",
+duration: 1000
+},
+close: function( event, ui ) { $( "#tempAppStorage" ).html("\n");  }
+});
+
+});
+ </script>
+<div id="tempAppStorage2" style="display:none; " >
+</div>
+<script>
+$(function() {
+$( "#tempAppStorage2" ).dialog({
+autoOpen: false,
+show: {
+effect: "fade",
+duration: 1000
+},
+hide: {
+effect: "fade",
+duration: 1000
+},
+close: function( event, ui ) { $( "#tempAppStorage2" ).html("\n");  }
+});
+
+});
+</script>
+<div id="tempAppStorage" style="display:none; " >
+</div>
+<!-- Preloader -->
+<!--
+<div id="preloader">
+<noscript>
+<div id="statusError">&nbsp;</div>
+</noscript>
+</div>
+<script type="text/javascript">
+if(localStorage["devMode"] === "true") {
+$('#status').hide();
+$('#preloader').hide();
+$('body').css({'overflow':'visible'});
+}
+	//<![CDATA[
+		$(window).load(function() { // makes sure the whole site is loaded
+if(localStorage["devMode"] === "false") {
+
+			$('#preloader').append("<div id=\"status\">&nbsp;</div>");
+			$('#status').fadeOut(); // will first fade out the loading animation
+			$('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+			$('body').delay(350).css({'overflow':'visible'});
+}
+		});
+	//]]>
+</script>-->
+<div id="cursor" style="position:fixed; z-index:10000; pointer-events:none; " ><img style="width:19pt; height:25pt; pointer-events:none; " src="theCursor.png" ></div>
+<script>
+$(document).bind('mousemove', function(e){
+    $('#cursor').css({
+       left:  e.pageX,
+       top:   e.pageY
+    });
+});
+
+if(localStorage["touchscreen-mode"] === "true") {
+  $("#cursor").hide();
+}
+else
+{
+  $("#cursor").show();
+}
+</script>
+    <noscript>
+        <style type="text/css" >
+#deleteapps-dialog {
+	display:none;
+}
+
+</style>
+    </noscript>
+    <div id="homescreen" >
+    <h1 id="title" >lightOS</h1>
+    <!--<h1 id='auo' style="color:white;" onclick="$(this).slideUp(500);" ontouchend="$(this).slideUp(500);">AUTHORIZED USE ONLY</h1>-->
+        <div id="clock" class="widget" >
+        <h2>Clock</h2>
+            <div id="time" ></div>
+            <script>
+            localStorage.weathercity = localStorage.weathercity;
+                function startTime() {
+                    var today = new Date();
+                    var h = today.getHours();
+                    var m = today.getMinutes();
+                    var s = today.getSeconds();
+                    // add a zero in front of numbers<10
+                    m = checkTime(m);
+                    s = checkTime(s);
+                    document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+                    t = setTimeout(function () {
+                        startTime()
+                    }, 500);
+                }
+
+                function checkTime(i) {
+                    if (i < 10) {
+                        i = "0" + i;
+                    }
+                    return i;
+                }
+            </script>
+        </div>
+        <div id="weather" class="widget" >
+        <h2>Weather</h2>
+        <span style="float:left; " id="wcitydisplay" >vienna</span><br>
+        <img id="weather-icon" style="width:50pt; height:50pt; float:left; " >
+        <h2 id="weather-temp" style="float:left; " ></h2>
+        <h2 id="weather-temp-more" style="float:left; " ></h2>
+         <h2 id="weather-temp-celsius" style="float:left; " >&nbsp;°C</h2>
+            <script>
+            if(localStorage.isWeatherSet == "false" || localStorage.isWeatherSet == undefined)
+            {
+                //localStorage.weathercity = "Vienna,at";
+                localStorage.isWeatherSet = false;
+                document.getElementById("weather-temp").innerHTML += "<br><p style='font-size:small;'>Please note, the weather-city set to vienna, austria, because you didn't set another one. Please press '# s #' and enter your city in format: city, country code(see <a href='http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements'>wikipedia-page</a>)</p>"
+            }
+            document.getElementById("wcitydisplay").innerHTML = localStorage.weathercity.split(",")[0];
+                $.getJSON( "http://api.openweathermap.org/data/2.5/weather?q=" + localStorage.weathercity, function( json ) {
+                    console.log(json);
+                    var moreTemp = "false";
+                    document.getElementById("weather-temp").className = false;
+                    for (var i = json.weather.length - 1; i >= 0; i--) {
+                        document.getElementById("weather-icon").src = "http://openweathermap.org/img/w/" + json.weather[i].icon + ".png";
+                    };
+                    document.getElementById("weather-temp").innerHTML += ((json.main.temp - 273.15)).toFixed(1);
+                    $("#weather-temp").click(function () {
+                        moreTemp = moreTemp == 'true' ? 'false' : 'true';
+                        if(moreTemp == "true")
+                        {
+                            document.getElementById("weather-temp").innerHTML = ((json.main.temp - 273.15));
+                        }
+                        else
+                        {
+                            document.getElementById("weather-temp").innerHTML = ((json.main.temp - 273.15)).toFixed(1);
+                        }
+                    });
+                });
+
+            </script>
+
+                    <div id="weatherCopyright" ><span>openweathermap.org</span></div>
+
+        </div>
+        <!---<div id="mCBg" class="sBG">></div><video loop autoplay>
+<source src="background.mp4" type="video/mp4">
+ </video-->
+
+        <div id="widgetContainer" >
+        </div>
+        <script src="hexaflip.js" ></script>
+    </div>
+    <div id="dockContainer" style="left:0; top:6px; display:inline-block; overflow:scroll; " name="menu" >
+      <a><div onclick="if(event.altKey) { alert('Sorry, but the appstore app is currently not supported in the window mode'); } else { location.href='appstore.html'; }" style="white-space:pre; height:105px; width:105px; " class="icon" ontouchstart="location.href='appstore.html'" ><img style="width:105%; height:105%; position:relative; " src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAABpCAMAAAAOXP0IAAAAaVBMVEUAAAANDQ0LCwsHBwcCAgICAgIHBwcDAwMEBAQCAgIDAwMODg4MDAwKCgoNDQ0NDQ0LCwsLCwsNDQ0KCgoYGBgiIiIcHBwmJiYQEBAgICAkJCQUFBQSEhIuLi4VFRUpKSkrKysxMTENDQ3AV15OAAAAE3RSTlMARco2FwOMKQ8dCGmt35x87Fv+N85pdAAAA/1JREFUaN7t1ouOoyAUgGEvbb3WakA8KoLw/g+5B+vKmL2J1Sa723+SaSYZ/XKQUL1Pnz596RLcg6/dC++kEqJXkfvRgpWAfk2fLIkp83GuJL73kV6R+v5EKUJpcd4k9W+S+rlzpQXivNfl8YaVFudsyULY6RI6b5HQeY/E+T8sAZwhVUGOFQHRYnGMRPIix4LowGHmoF8gTJNngXdc2eoJgW3yIu/AAtIL66yhm3dkPtH94qwiOvYOLSfwU0iT7PAdrhdnBQXe0d0I/Gwi4h8upSX5wUEp946vIpqvHIzgDj+hgKwdM9LDO6OQaAtNkTL1Tqkg1pkgUnnnlBBiHQx3+Fk9iP4KkdA7q+udaBspvPOqcCg7UuKdWGGHOmM7RLfHXFUQsox0exTP8oPMMOdY/4xq8h3iVGB0qnzEL++B6k5EI5spKeXYzBThahgGNcc0FNErTvwA3bdNw2x1T8g0EuvapVFRAAj83VCltaiHQVINSxwlA4FYllRwqkYqBADfafmaN0oNTctteF8gJkHNQ5rrW9UKRtHatYShhlHhRB2FLxJSGiGw28EkpKKCMgoicYciA43D2DDga4lPI60lqqQwn3CPXaFLqaXZXU0t1tI0FKdikez6TVTgCKV33RhIdstIVuNa9Fay6/ekcjcp0DVCauha/pP6eduJ528Tp6qZ5B4Kt7e71kCylk33Q82cXNUMivWG4nBzOUeZUmpkvJHrRtMwp9YNqiYz9dj+akeNA6RWcrGaP9WNihIuJirbBmWaqYGBxsHGZhPTPRsGroH3QnCotkAVsLEFnZcc9/iGuqVGSQ0BIMbB/zPkA2ec5Fdfd0puIWy1VK3OkjtwvuFcCgFwnsi7aKbkNsJK9aioDj0f5wKR/BkqzP8EuHZbCUt1aoAyxtsEf6QyKC7TJ65d0/3m/rXJ/jHX4lU69zC0st9K13h+h2RKdhummBFLScXIRFyjeNMZIZQa9qWmR7W1Srdj1+yrkzXc061SAFPaOZjaekZgfpZl/k1T1nOXKEOjyrDE8du9HalLopVCpLteWJh0k1gjeHy+hL1PandLrWSUsq0/r0gMJba91ySnWrlXap0l+iap/huksWXt9l6TnOreKfW7JGiH2k0aKd8v1dszEiTe1Y25pl61S4rSOL26QPFln6TDS3KJry5Qkma7JD+JXKg0TqI4g3qPFEVIpQ4jRYlZvc5FquVISz8Mp6EcpCgsezmMLg0tzyPfWQqTB+/brnaIcahCh5mwFCVDwU/ivwygrMxIKKUoOQwVJv7j5lIWzlCceltLn08qujiV4BWOkKHwQsScSwzkeBzFiKHmEl4Qz4eRI5Yi5xJecJ0dd80p79On/7tvh1ZVQBl6YLIAAAAASUVORK5CYII=" ></div><div style="display:none; " class="appName" >Appstore</div></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.apps[i].name + "</figcaption>---->
+  <a><div onclick="if(event.altKey) { alert('Sorry, but the settings app is currently not supported in the window mode');/*gotoSiteInWindow('settings.html');*/ } else { location.href='settings.html'; }" style="white-space:pre; height:105px; width:105px; " class="icon" ontouchstart="location.href='settings.html'" ><img style="width:105%; height:105%; position:relative; " src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAABpCAYAAAA5gg06AAAACXBIWXMAAAsTAAALEwEAmpwYAAA4IGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS41LWMwMTQgNzkuMTUxNDgxLCAyMDEzLzAzLzEzLTEyOjA5OjE1ICAgICAgICAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIKICAgICAgICAgICAgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIgogICAgICAgICAgICB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIKICAgICAgICAgICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBQaG90b3Nob3AgQ0MgKE1hY2ludG9zaCk8L3htcDpDcmVhdG9yVG9vbD4KICAgICAgICAgPHhtcDpDcmVhdGVEYXRlPjIwMTQtMDQtMzBUMTk6NTE6MzIrMDI6MDA8L3htcDpDcmVhdGVEYXRlPgogICAgICAgICA8eG1wOk1vZGlmeURhdGU+MjAxNC0wNC0zMFQxOTo1Mjo1OCswMjowMDwveG1wOk1vZGlmeURhdGU+CiAgICAgICAgIDx4bXA6TWV0YWRhdGFEYXRlPjIwMTQtMDQtMzBUMTk6NTI6NTgrMDI6MDA8L3htcDpNZXRhZGF0YURhdGU+CiAgICAgICAgIDxkYzpmb3JtYXQ+aW1hZ2UvcG5nPC9kYzpmb3JtYXQ+CiAgICAgICAgIDxwaG90b3Nob3A6Q29sb3JNb2RlPjM8L3Bob3Rvc2hvcDpDb2xvck1vZGU+CiAgICAgICAgIDx4bXBNTTpJbnN0YW5jZUlEPnhtcC5paWQ6NTdjNjE4YzgtMDliNy00NGY5LWJjNDUtN2Q0NDBhN2I3ZGU3PC94bXBNTTpJbnN0YW5jZUlEPgogICAgICAgICA8eG1wTU06RG9jdW1lbnRJRD54bXAuZGlkOjU3YzYxOGM4LTA5YjctNDRmOS1iYzQ1LTdkNDQwYTdiN2RlNzwveG1wTU06RG9jdW1lbnRJRD4KICAgICAgICAgPHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD54bXAuZGlkOjU3YzYxOGM4LTA5YjctNDRmOS1iYzQ1LTdkNDQwYTdiN2RlNzwveG1wTU06T3JpZ2luYWxEb2N1bWVudElEPgogICAgICAgICA8eG1wTU06SGlzdG9yeT4KICAgICAgICAgICAgPHJkZjpTZXE+CiAgICAgICAgICAgICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0iUmVzb3VyY2UiPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6YWN0aW9uPmNyZWF0ZWQ8L3N0RXZ0OmFjdGlvbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0Omluc3RhbmNlSUQ+eG1wLmlpZDo1N2M2MThjOC0wOWI3LTQ0ZjktYmM0NS03ZDQ0MGE3YjdkZTc8L3N0RXZ0Omluc3RhbmNlSUQ+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDp3aGVuPjIwMTQtMDQtMzBUMTk6NTE6MzIrMDI6MDA8L3N0RXZ0OndoZW4+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDpzb2Z0d2FyZUFnZW50PkFkb2JlIFBob3Rvc2hvcCBDQyAoTWFjaW50b3NoKTwvc3RFdnQ6c29mdHdhcmVBZ2VudD4KICAgICAgICAgICAgICAgPC9yZGY6bGk+CiAgICAgICAgICAgIDwvcmRmOlNlcT4KICAgICAgICAgPC94bXBNTTpIaXN0b3J5PgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICAgICA8dGlmZjpYUmVzb2x1dGlvbj43MjAwMDAvMTAwMDA8L3RpZmY6WFJlc29sdXRpb24+CiAgICAgICAgIDx0aWZmOllSZXNvbHV0aW9uPjcyMDAwMC8xMDAwMDwvdGlmZjpZUmVzb2x1dGlvbj4KICAgICAgICAgPHRpZmY6UmVzb2x1dGlvblVuaXQ+MjwvdGlmZjpSZXNvbHV0aW9uVW5pdD4KICAgICAgICAgPGV4aWY6Q29sb3JTcGFjZT42NTUzNTwvZXhpZjpDb2xvclNwYWNlPgogICAgICAgICA8ZXhpZjpQaXhlbFhEaW1lbnNpb24+MTA1PC9leGlmOlBpeGVsWERpbWVuc2lvbj4KICAgICAgICAgPGV4aWY6UGl4ZWxZRGltZW5zaW9uPjEwNTwvZXhpZjpQaXhlbFlEaW1lbnNpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAg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" ></div><div style="display:none; " class="appName" >Settings</div></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.apps[i].name + "</figcaption>---->
+
+  </div>
+    <button id="delAppsBtn" style="background-color:rgba(0,0,0,0.00); opacity:0; -webkit-transition-property:all; transition-property:all; -o-transition-property:all; -ms-transition-property:all; -moz-transition-property:all; -webkit-transition-duration:0.5s; transition-duration:0.5s; -o-transition-duration:0.5s; -ms-transition-duration:0.5s; -moz-transition-duration:0.5s; transition-timing-function:initial; -webkit-transition-timing-function:initial; -o-transition-timing-function:initial; -ms-transition-timing-function:initial; -moz-transition-timing-function:initial; transition-delay:initial; -webkit-transition-delay:initial; -o-transition-delay:initial; -ms-transition-delay:initial; -moz-transition-delay:initial; " onmouseout="this.style.opacity = 0.0;" onmouseover="this.style.opacity = 1.0;" >
+      <object data="delete.svg" type="image/svg+xml" >
+        <img src="yourfallback.jpg" >
+      </object>
+</button>
+<div id="deleteapps-dialog" title="Delete this app?" >
+<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0px 7px 20px 0px; " ></span>It will be gone forever! Are you sure?</p>
+</div>
+    <script>
+ $(function() {
+$( "#deleteapps-dialog" ).dialog({
+resizable: false,
+height:200,
+modal: true,
+autoOpen: false,
+buttons: {
+"Delete the app": function() {
+$( this ).dialog( "close" );
+deleteApp();
+
+
+},
+Cancel: function() {
+$( this ).dialog( "close" );
+}
+}
+});
+});
+function findAndRemove(array, property, value) {
+   $.each(array, function(index, result) {
+      if(result[property] == value) {
+          //Remove from array
+          array.splice(index, 1);
+      }
+   });
+}
+    $("#delAppsBtn").click(function() {
+      var wantsToDeleteApp = true;
+      window.appToDelete = prompt("Enter the app's name","");
+      /*findAndRemove(window.json.apps, 'name',appToDelete);
+      localStorage.home = JSON.stringify(window.json.apps);
+      localStorage.installedApps = JSON.parse("{\"apps\":[" + localStorage.installedApps.replace(/,(\s+)?$/, '').replace("undefined","") + "]}");
+      localStorage.installedApps = findAndRemove(localStorage.installedApps, 'name',appToDelete);
+      localStorage.installedApps = JSON.stringify(localStorage.installedApps);
+      localStorage.installedApps = localStorage.installedApps.replace("{apps:[","");
+      localStorage.installedApps = localStorage.installedApps.replace("]}","");*/
+      if(appToDelete !== null) { $( "#deleteapps-dialog" ).dialog("open"); }
+
+    });
+    function deleteApp() {
+      if(window.appToDelete != undefined)
+        localStorage.installedApps = localStorage.installedApps.replace(",{\"name\":\"" + window.appToDelete + "\"}","");
+        localStorage.installedApps = localStorage.installedApps.replace("{\"name\":\"" + window.appToDelete + "\"}","");
+        localStorage.installedApps = localStorage.installedApps.replace("{\"name\":\"" + window.appToDelete + "\"},","");
+        location.reload();
+    }
+    </script>
+
+<!--<div id='mainBar' style="line-height:140%;"><span style='margin-right:90%; '>&#8617;</span><span style='position:fixed; margin-left:-45%; line-height:100%;' onclick='location.href="index.html"' ontouchstart='location.href="index.html"'>⌂</span><span style='line-height:120%; vertical-align:top; ' onclick='location.href="apps/applauncher.html"' ontouchstart='location.href="apps/applauncher.html"'>&#9992;</span> </div>-->
+
+
+</body></html>

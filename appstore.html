@@ -6,46 +6,101 @@
 <script src="base.js"></script>
 <link rel="stylesheet" type="text/css" href="maximalo.css" />
 <style>
-*
+body, html
 {
-  font-family:Helvetica;
+  font-family:Helvetica Neue;
   transition: all 0.5s;
+}
+.app {
+  background-color:lightgrey;
+  height:12.5%;
+}
+.app button {
 }
 </style>
 <script>
 $.ajax({
 type: "GET",
-url: "http://nicelikebagels.tk/lightos-appstore/apps.json?callback=0",
+url: "http://nicelikebagels.lima-city.de/lightos-appstore/apps.json?callback=0",
 dataType: "script"
 });
 
-window.setTimeout(function () {load();},1000);
+window.setTimeout(function () {load();},500);
 function load() {
 var index;
 
 for (index = 0; index < asjson.apps.length; ++index) {
-    document.getElementById("apps").innerHTML += "<div style='background-color:gray;'>";
-    document.getElementById("apps").innerHTML += JSON.parse(asjson.apps[index].json.replace(/'/g,"\"")).name;
-    document.getElementById("apps").innerHTML += "<button id='" + JSON.parse(asjson.apps[index].json).name + "' index='" + index + "' class='installButton' onclick='' style='margin-left:2%;'>Install</button>";
-
-    document.getElementById("apps").innerHTML += "</div>";
+    document.getElementById("apps").innerHTML += "<div class='app'>" + asjson.apps[index].displayName + "<button id='" + JSON.parse(asjson.apps[index].json).name + "' data-index='" + index + "' class='installButton' style='margin-left:2%;background-color:black;color:white;-webkit-border-radius:5px;transition:all 0.5s;' ontouchend='install(this.id);' onclick='install(this.id);'>Install</button></div><br/>";
     if(index != asjson.apps.length - 1) document.getElementById("apps").innerHTML += "";
 }
+$('*').css('cursor','pointer');
+/*
 $(".installButton").click(function () {
-  writeFile("apps/" + JSON.parse(asjson.apps[$(this).attr("index")].json.replace(/'/g,"\"")).name + "/index.html", asjson.apps[ $(this).attr("index") ].files["index.html"]);
-  writeFile("apps/" + JSON.parse(asjson.apps[$(this).attr("index")].json.replace(/'/g,"\"")).name + "/icon", asjson.apps[ $(this).attr("index") ].files["icon"]);
-  localStorage.installedApps += asjson.apps[ $(this).attr("index") ].json + ",";
-  //localStorage.installedApps += ",";
-  //localStorage.installedApps = localStorage.installedApps.replace(/,$/,'');
-  alert("Installed " + JSON.parse(asjson.apps[$(this).attr("index")].json.replace(/'/g,"\"")).name);
-});
+
+writeFile("apps/" + JSON.parse(asjson.apps[$(this).attr("index")].json.replace(/'/g,"\"")).name + "/index.html", asjson.apps[ $(this).attr("index") ].files["index.html"]);
+writeFile("apps/" + JSON.parse(asjson.apps[$(this).attr("index")].json.replace(/'/g,"\"")).name + "/icon", asjson.apps[ $(this).attr("index") ].files["icon"]);
+localStorage.installedApps += asjson.apps[ $(this).attr("index") ].json + ",";
+alert("Installed " + JSON.parse(asjson.apps[$(this).attr("index")].json.replace(/'/g,"\"")).name);
+});*/
 }
+
+function install(that) {
+  writeFile("apps/" + JSON.parse(asjson.apps[$("#" + that).data("index")].json.replace(/'/g,"\"")).name + "/index.html", asjson.apps[ $("#" + that).data("index") ].files["index.html"]);
+  writeFile("apps/" + JSON.parse(asjson.apps[$("#" + that).data("index")].json.replace(/'/g,"\"")).name + "/icon", asjson.apps[ $("#" + that).data("index") ].files["icon"]);
+  localStorage.installedApps += asjson.apps[ $("#" + that).data("index") ].json + ",";
+  alert("Installed " + JSON.parse(asjson.apps[$("#" + that).data("index")].json.replace(/'/g,"\"")).name);
+}
+
+
+function back() {
+  localStorage.newApp = 'true';
+  location.href='index.html';
+}
+
+
+/* Touchstuff */
+function touchHandler(event)
+{
+    var touches = event.changedTouches,
+        first = touches[0],
+        type = "";
+
+    switch(event.type)
+    {
+       case "touchstart": type = "mousedown"; break;
+       case "touchmove":  type = "mousemove"; break;
+       case "touchend":   type = "mouseup"; break;
+       default: return;
+    }
+
+    //initMouseEvent(type, canBubble, cancelable, view, clickCount,
+    //           screenX, screenY, clientX, clientY, ctrlKey,
+    //           altKey, shiftKey, metaKey, button, relatedTarget);
+
+    var simulatedEvent = document.createEvent("MouseEvent");
+    simulatedEvent.initMouseEvent(type, true, true, window, 1,
+                          first.screenX, first.screenY,
+                          first.clientX, first.clientY, false,
+                          false, false, false, 0/*left*/, null);
+
+    first.target.dispatchEvent(simulatedEvent);
+    event.preventDefault();
+}
+
+function init()
+{
+    document.addEventListener("touchstart", touchHandler, true);
+    document.addEventListener("touchmove", touchHandler, true);
+    document.addEventListener("touchend", touchHandler, true);
+    document.addEventListener("touchcancel", touchHandler, true);
+}
+/**/
 </script>
 </head>
 <body>
-<div id="apps">
+<div id="apps" style="margin:12pt;">
 
 </div>
-<button style="position:fixed;bottom:0;" onclick="localStorage.newApp = 'true';location.href='index.html';">Back</button>
+<button style="position:fixed;bottom:0;right:0;" onclick="back()" ontouchend="back()">Back</button>
 </body>
 </html>

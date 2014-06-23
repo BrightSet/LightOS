@@ -1,11 +1,12 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<script src="base.js"></script>
 <style>
 body
 {
-background-color:black; 
-font-family: Courier; 
+background-color:black;
+font-family: Courier;
 color:white;
 }
 p
@@ -14,7 +15,7 @@ white-space: nowrap;
 }
 p:not(.bold):not(.d)
 {
-background-color:white; 
+background-color:white;
 color:black;
 }
 .bold
@@ -27,13 +28,14 @@ font-weight: bold;
 <title>forWardOS | recovery mode</title>
 </head>
 
-<body onkeydown="getKeyCode()">
+<body onkeydown="getKeyCode(event)">
 <p class="bold">Recovery Mode:</p>
 <br>
 <br>
 <p class="sel" id="sn">Start normally</p>
 <p class="d sel" id="sc">Start the command-line</p>
 <p class="d sel" id="sd">Shutdown</p>
+<p class="d sel" id="ee">Erase data</p>
 </body>
 <script>
 var i = 0;
@@ -48,11 +50,11 @@ function getKeyCode(event) {
    }
    if(i == sels.length)
    {
-   		
+
    		i=0;
-   		sels[i].setAttribute("class", "sel");
+   		document.getElementById("sn").setAttribute("class", "sel");
    		sels[i-1].setAttribute("class", "d sel");
-   		
+
    }
    if (event.keyCode == 40) {
    		i++;
@@ -75,8 +77,11 @@ function getKeyCode(event) {
    			case "sd":
    				window.location.href = "data:";
    				break;
+         case "ee":
+             reset();
+             break;
    			default:
-   				break; 
+   				break;
    		}
    }
 

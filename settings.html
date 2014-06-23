@@ -1,37 +1,26 @@
 <html class='noMainBar'>
 <head>
-<script src="base.js"></script>
+<!--<script src="base.js"></script>-->
 <link rel="stylesheet" type="text/css" href="maximalo.css" />
-<style>*{font-family:Helvetica;}</style>
+<style>*{font-family:Helvetica;}body, html {margin:12pt;} #savenclose { position:relative;top:20pt;height:20pt;}</style>
 <script src="../jquery-1.10.2.min.js"></script>
 
 </head>
-<body onload="load_()">
+<body onload="window.setTimeout(function () { load_(); },10);">
 <h2>
   General Settings
 </h2>
 Alternate stylesheet(for advanced users):
 <input onblur='if(this.value != "") { localStorage.themename=this.value; }' id="themename" placeholder="Type in the name of your theme"></input>
-<script>
+<h3>
+  Information
+</h3>
+<label>Device name:</label>
+<input placeholder='' id='device-name' onblur='if(this.value != "") {localStorage.deviceName=this.value;}' />
+<br/>
+<label>Username:</label>
+<input placeholder='' id='username' onblur='if(this.value != "") {localStorage.username=this.value;}' />
 
-
-
-var i, checkboxes = document.querySelectorAll('input[type=checkbox]');
-var t, textFields = document.querySelectorAll('input[type=checkbox]');
-
-function save() {
-    for (i = 0; i < checkboxes.length; i++) {
-        localStorage.setItem(checkboxes[i].value, checkboxes[i].checked);
-    }
-
-}
-
-function load_() {
-    for (i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].checked = localStorage.getItem(checkboxes[i].value) === 'true' ? true:false;
-    }
-}
-</script>
 <br>
 <br>
 <h2>
@@ -53,6 +42,14 @@ function load_() {
 <br>
 <br>
 <h2>
+  Control
+</h2>
+<input type="checkbox" value="touchscreen-mode">Touchscreen mode
+<br />
+<input type="checkbox" value="devMode">Developer mode
+<br>
+<br>
+<h2>
   License
 </h2>
 Copyright Brightset 2014.
@@ -61,6 +58,26 @@ All rights reserved.
 <br>
 <br>
 Using <a href='https://github.com/designmodo/Flat-UI'>FlatUI - Design Framework</a><br>
-<button style="bottom:12pt; position:fixed;margin:0;" onclick="save(); location.href='index.html';">Save and close</button>
+<button id="savenclose" style="bottom:12pt; margin:0;" onclick=" save(); window.setTimeout(function () { location.href='index.html'; },1000);">Save and close</button>
+<script>
+
+
+var i, checkboxes = document.querySelectorAll('input[type=checkbox]');
+var t, textFields = document.querySelectorAll('input[type=checkbox]');
+
+function save() {
+    for (i = 0; i < checkboxes.length; i++) {
+        localStorage.setItem(checkboxes[i].value, checkboxes[i].checked);
+    }
+
+}
+
+function load_() {
+    for (i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = localStorage.getItem(checkboxes[i].value) === 'true' ? true:false;
+    }
+}
+
+</script>
 </body>
 </html>

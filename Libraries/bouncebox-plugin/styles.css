@@ -1,0 +1,28 @@
+
+#bouncebox{
+	background-color:#fcfcfc;
+	height:115px;
+	padding:20px;
+	margin-top:-10px;
+	padding-top:30px;
+	width:400px;
+	border:1px solid #fcfcfc;
+	color:#494848;
+	text-shadow:1px 1px 0 white;
+
+		-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}
+
+#bouncebox p{
+	font-size:25px;
+
+	padding-left:90px;
+}
+
+#bouncebox p b{
+	font-size:52px;
+	display:block;
+}
+

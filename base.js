@@ -1,11 +1,34 @@
-
 var ready = false;
-
 jQuery.fx.interval = 0;
 function nothing() {
 
 }
-$('img').on('dragstart', function(event) { event.preventDefault(); });
+String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
+var savedState;
+
+$(window).on('beforeunload', function(e) {
+  //return "Are you sure?";
+});
+
+$(window).on('unload', function(e) {
+
+  // user didn't save!!
+  // your auto-save function:
+  // auto_save(savedState);
+  localStorage.beforeShutdown = $("body").html();
+
+  // browser leaves this tab.
+});
+function askRestore() {
+  if(confirm("Continue from last time's savestate?")) {
+    $("body").html(localStorage.beforeShutdown);
+  }
+  localStorage.beforeShutdown = "";
+
+}
+
+/**/
+//$('img').on('dragstart', function(event) { event.preventDefault(); });
 function fatalError(message) {
     if (message != "ReferenceError: Can't find variable: HexaFlip") {
 
@@ -28,6 +51,33 @@ function fatalError(message) {
 window.onerror = function (error, url, line) {
     fatalError(error + "\nURL: " + url + "\nLine" + line);
 };
+
+function wordlyExecute(s) {
+  if(s.contains("Open")) {
+    if(s.split("Open ")[1] == "Appstore" || s.split("Open ")[1] == "AppStore" || s.split("Open ")[1] == "App store" || s.split("Open ")[1] == "App Store") {
+      location.href='appstore.html';
+    }
+    else if(s.split("Open ")[1] == "Settings" || s.split("Open ")[1] == "Preferences" || s.split("Open ")[1] == "Options") {
+      location.href = "settings.html";
+    }
+    else
+    {
+      gotoFSite("apps/" + s.split("Open ")[1] + "/index.html");
+    }
+  }
+  else if(s.contains("Window")) {
+    gotoFSiteInWindow("apps/" + s.split("Window ")[1] + "/index.html");
+  }
+  else if(s.contains("Delete an app")) {
+    var wantsToDeleteApp = true;
+      window.appToDelete = prompt("Which app?","");
+      if(appToDelete !== null) { $( "#deleteapps-dialog" ).dialog("open"); }
+  }
+  else {
+    alert("What?");
+  }
+}
+//if(localStorage["devMode"] === "true") { window.setInterval(function () { location.reload(); },2000);}
 /**/
 /* Temporaryly removed!
 var movementStrength = 4;
@@ -71,7 +121,49 @@ function mok() {
 
 	}
 }
+function replaceTo(html) {
+  window.oldHTML = $("body").html();
+  $("body").html(html);
+}
+function restore() {
+  $("body").html(window.oldHTML);
+  location.reload();
+}
+function down() {
+realDown("");
+}
+function realDown(s) {
+    $(":not(#top)").animate({"top":"0"},1000);
+    $("#top").animate({"top":"800%"},1000,"swing",function () {$("#top").hide();});
+
+//$("#top").hide();
+}
+function up() {
+  realUp("");
+}
+$(document).bind('mousemove', function(e){
+    $('#cursor').css({
+       left:  e.pageX,
+       top:   e.pageY
+    });
+});
+
+function realUp(s) {
+  var time;
+  $("#top").show(250);
+  //("#top").show();
+      $(":not(#mainField)").animate({"top":"100%"},1000,"swing",function () {time = Math.pow(time,2);
+    });
+
+
+    //  $("#top").slideDown();
+
+
+}
 $(document).ready(function () {
+
+
+
     $("#themelink").attr("href",localStorage.themename);
 	$("*").toggleClass("cursor");
 
@@ -113,7 +205,7 @@ console.log(filename);
 // App parsing thingy [
 /*
   localStorage.installedApps = localStorage.installedApps.replace(/,(\s+)?$/, '');
-  localStorage.home = '{"apps": [{"name":"placeholder"}';
+  localStorage.home = '{"apps": [{"name":""}';
   //if(localStorage.installedApps != undefined) localStorage.home += ",";
   if(localStorage.installedApps || localStorage.installedApp == undefined) localStorage.home += ",";
   //if(localStorage.installedApp === undefined) localStorage.installedApps = "";
@@ -147,11 +239,12 @@ if(localStorage.installedApps) localStorage.home += localStorage.installedApps;
   //if(localStorage.installedApps = undefined) localStorage.installedApps = "";
 localStorage.home = localStorage.home.replace("},,{","},{");
 localStorage.home = localStorage.home.replace(/\,{2}/g,"");
-if(/(\/appstore\.html)/g.test(document.referrer))
+
+if(/appstore.html/g.test(document.referrer))
 {
   location.reload();
 }
-
+window.setTimeout(function() { $("#appplaceholder").remove(); },1);
 
 // ]
 // Default files [
@@ -217,15 +310,48 @@ function launchFullscreen(element) {
   }
 }
 document.ontouchstart = function (e) {
-    e.preventDefault();
+    //e.preventDefault();
+    return true;
+}
+document.ontouchend = function (e) {
+    //e.preventDefault();
+    return true;
+}
+document.ontouchmove = function(e){
+  window.shouldReactOnTouchEnd = false;
+     return true;
+     //window.shouldReactOnTouchEnd = true;
+   }
+$("*").on("click",function() {
+    return false;
+});
+var scroll = 0;
+function debounce(a,b,c){var d;return function(){var e=this,f=arguments;clearTimeout(d),d=setTimeout(function(){d=null,c||a.apply(e,f)},b),c&&!d&&a.apply(e,f)}}
+function scrollDown() {
+//if(scroll<0 ||scroll>document.getElementById('dockContainer').scrollHeight) {scroll=0;document.getElementById('dockContainer').scrollTop=0;}
+if(scroll<document.getElementById('dockContainer').scrollHeight) {
+scroll+=$(".icon").height();
+     $('#dockContainer').animate({
+    scrollTop: scroll
+}, 1000);
+}
+}
+function scrollUp() {
+if(scroll>0) {
+scroll-=$(".icon").height();
+}
+$('#dockContainer').animate({
+scrollTop: scroll
+}, 1000);
+//if(scroll<0 ||scroll>document.getElementById('dockContainer').scrollHeight) {scroll=0}
 }
 $(document).ready(function(){
 
+
 $('body').on({
     'mousewheel': function(e) {
-        if (e.target.id == 'el') return;
-        e.preventDefault();
-        e.stopPropagation();
+      e.preventDefault();
+
     }
 })
 
@@ -241,7 +367,42 @@ function _(o) {
 	return document.getElementById(o);
 }
 function gotoFSite(f) {
-  location.href = "data:text/html;charset=utf-8," + readFile(f);
+  // location.href = "data:text/html;charset=utf-8," + readFile(f);
+  $("#fullTApp").css({"display":"block"});
+  $("#fullTApp").html(readFile(f));
+  $("#quitButton").css({"display":"block"});
+
+}
+function gotoFSiteInWindow(f) {
+  if($("#tempAppStorage").html() == "\\n") {
+  $("#tempAppStorage").html(readFile(f));
+  $("#tempAppStorage").dialog("open");
+}
+else {
+  if($("#tempAppStorage2").html() == "\\n") {
+  $("#tempAppStorage2").html(readFile(f));
+  $("#tempAppStorage2").dialog("open");
+  }
+  else {
+  alert("There is no free window!");
+  }
+}
+}
+
+function gotoSiteInWindow(s) {
+  if($("#tempAppStorage").html() == "\\n") {
+  $("#tempAppStorage").load(s);
+  $("#tempAppStorage").dialog("open");
+}
+else {
+  if($("#tempAppStorage2").html() == "\\n") {
+  $("#tempAppStorage2").load(s);
+  $("#tempAppStorage2").dialog("open");
+  }
+  else {
+  alert("There is no free window!");
+  }
+}
 }
 $(document).ready(function () {
 
@@ -269,23 +430,25 @@ $(document).ready(function () {
                 //onclick=\"document.getElementsByTagName('body')[0].className += ' sROut'; setTimeout(function(){window.location.href='" + json.menus[i].href + "'},1000);\"
                 //$("#dockContainer").append("<figure><div app='apps/" + json.apps[i].name + "/index.html' class='app' id='m" + json.apps[i].name + "'></div>");
 
-                //$("#dockContainer").append("<a><div onclick='setTimeout(function(){window.location.href=\"apps/" + json.apps[i].name + "/index.html\";},0);' style='content:url(apps/" + json.apps[i].name + "/icon.png); white-space: pre; display: inline-block; width:5%;height:5%;' class='icon' ontouchstart='setTimeout(function(){window.location.href=\"apps/" + json.apps[i].name + "/index.html\";},0);'></div><div style='display: none' class='appName'>" + json.apps[i].name + "</div></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.apps[i].name + "</figcaption>----></figure>");
+                //$("#dockContainer").append("<a><div onclick='setTimeout(function(){window.location.href=\"apps/" + json.apps[i].name + "/index.html\";},0);' style='content:url(apps/" + json.apps[i].name + "/icon.png); white-space: pre;  width:5%;height:5%;' class='icon' ontouchend='setTimeout(function(){window.location.href=\"apps/" + json.apps[i].name + "/index.html\";},0);'></div><div style='display: none' class='appName'>" + json.apps[i].name + "</div></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.apps[i].name + "</figcaption>----></figure>");
 
-                $("#dockContainer").append("<a><div id='app" + window.json.apps[i].name + "' onclick='gotoFSite(\"apps/" + window.json.apps[i].name + "/index.html\");' style=' white-space: pre; display: inline-block; width:5%;height:5%; min-height:105px;min-width:105px;' class='icon' ontouchstart='gotoFSite(\"apps/" + window.json.apps[i].name + "/index.html\");'><img style='width:105%;height:10%;position:relative;' src='data:image/png;base64," + readFile("apps/" + window.json.apps[i].name + "/icon") + "' onerror='this.src=\'http://\'' /></div><div style='display: none' class='appName'>" + window.json.apps[i].name + "</div></a><!----<figcaption style='color:black; padding-top:25px;'>" + window.json.apps[i].name + "</figcaption>----></figure>");
-
+                $("#dockContainer").append("<a><div id='app" + window.json.apps[i].name + "' onclick='if(event.altKey) { gotoFSiteInWindow(\"apps/" + window.json.apps[i].name + "/index.html\"); } else { gotoFSite(\"apps/" + window.json.apps[i].name + "/index.html\"); }' style=' ' class='icon' ontouchend='gotoFSite(\"apps/" + window.json.apps[i].name + "/index.html\");'><img class='iconImg' style='' src='data:image/png;base64," + readFile("apps/" + window.json.apps[i].name + "/icon") + "' onerror='this.src=\'http://\'' /><span style='margin-left:12pt;color:white;'>" + json.apps[i].name + "</span></div><div style='display: none' class='appName'>" + window.json.apps[i].name + "</div></a><!----<figcaption style='color:black; padding-top:25px;'>" + window.json.apps[i].name + "</figcaption>----></figure>");
                 //App Launcher
                 //--------------------------------------------------------------------------------------------------------------------------------
                 //if (json.menus[i].title != "launcher") {
                 	/*$("#menuContainer").append("<figure><div draggable='false' app='" + json.menus[i].href + "' class='app' id='m" + json.menus[i].title + "'></div>");
-                	$("#menuContainer").append("<a><img onclick='setTimeout(function(){window.location.href=\"" + json.menus[i].href + "\";},0);' src='" + 	json.menus[i].icon + "' class='icon' ontouchstart='setTimeout(function(){window.location.href=\"" + json.menus[i].href + "\";},0);'/></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.menus[i].title + "</figcaption>----></figure>");*/
+                	$("#menuContainer").append("<a><img onclick='setTimeout(function(){window.location.href=\"" + json.menus[i].href + "\";},0);' src='" + 	json.menus[i].icon + "' class='icon' ontouchend='setTimeout(function(){window.location.href=\"" + json.menus[i].href + "\";},0);'/></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.menus[i].title + "</figcaption>----></figure>");*/
                    if(filename=="applauncher.html") {
-                   $("#menuContainer").append("<figure><div app='./" + json.apps[i].name + "/index.html' class='app' id='m" + json.apps[i].name + "'></div>");
-                $("#menuContainer").append("<a><img onclick='setTimeout(function(){window.location.href=\"./" + json.apps[i].name + "/index.html\";},0);' src='./" + json.apps[i].name + "/icon.png' class='icon' ontouchstart='setTimeout(function(){window.location.href=\"./" + json.apps[i].name + "/index.html\";},0);'/></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.apps[i].name + "</figcaption>----></figure>");
+                     $("#menuContainer").append("<a><div id='app" + window.json.apps[i].name + "' onclick='if(event.altKey) { gotoFSiteInWindow(\"apps/" + window.json.apps[i].name + "/index.html\"); } else { gotoFSite(\"apps/" + window.json.apps[i].name + "/index.html\"); }' style=' white-space: pre;  height:105px;width:105px;' class='icon' ontouchend='gotoFSite(\"apps/" + window.json.apps[i].name + "/index.html\");'><img style='width:105%;height:105%;position:relative;' src='data:image/png;base64," + readFile("apps/" + window.json.apps[i].name + "/icon") + "' onerror='this.src=\'http://\'' /></div><div style='display: none' class='appName'>" + window.json.apps[i].name + "</div></a><!----<figcaption style='color:black; padding-top:25px;'>" + window.json.apps[i].name + "</figcaption>----></figure>");
                 }//}
                 $( ".icon" ).each(function( index ) {
                 	document.getElementsByClassName("icon")[index].style.backgroundColor = '#'+Math.random().toString(8).substr(-6);
-									document.getElementsByClassName("icon")[index].style.borderRadius = 1000 + "px";
+
+                  //document.getElementsByClassName("icon")[index].style.backgroundColor = "rgba(255,255,255,0.5)"
+                  //document.getElementsByClassName("icon")[index].style.borderRadius = 5 + "px";
+
                 });
+
 
                 //--------------------------------------------------------------------------------------------------------------------------------
                 /*$(document).ready(function () {
@@ -318,7 +481,7 @@ $(document).ready(function () {
         });
     //*/
 
-
+/*
  $( "#settings" ).dialog({
 autoOpen: false,
 show: {
@@ -329,16 +492,38 @@ hide: {
 effect: "fade",
 duration: 500
 }
-});
+});*/
 
+    var devMouse = false;
     Mousetrap.bind('up up down down left right left right b a enter', function (e) {
         prevent = true;
         //document.getElementById('menuContainer').className += ' sROut';
         /*setTimeout(function(){*/
         window.location.href = "sm.html" /*},1000)*/ ;
     });
+    Mousetrap.bind('up', function (e) {
+        scrollUp();
+    });
+    Mousetrap.bind('down', function (e) {
+        scrollDown();
+    });
     Mousetrap.bind('command+shift+f', function (e) {
         launchFullscreen(document.documentElement);
+    });
+    Mousetrap.bind('command', function (e) {
+        $("#mainField").focus();
+$("#mainField").css("opacity","1");
+$("#mainFieldBG").attr("style","background-color:black;");
+$("#mainField").css("left","50%");
+    });
+    Mousetrap.bind('command+alt+c', function (e) {
+        devMouse = !devMouse;
+        if(devMouse) {
+          $("*").css("cursor:default;");
+        }
+        if(!devMouse) {
+          $("*").css("cursor:url(cursor.gif);");
+        }
     });
     Mousetrap.bind('# + #', function (e) {
         $('img').css({"-webkit-filter":"blur(10px)"});
@@ -348,20 +533,16 @@ duration: 500
       var content = prompt("",readFile(fname) );
       writeFile(fname,content);
     });
-    Mousetrap.bind('# s #', function (e) {
-      $("#settings").dialog("open");
-    //$("#settings").html(/*readFile("apps/settings/index.html")*/);
-    });
 });
 
 function s4() {
     return Math.floor((1 + Math.random()) * 0x10000)
         .toString(16)
         .substring(1);
-};
+}
 
 function addQuitButton() {
-    $("#menuContainer").append("<a><img onclick='setTimeout(function(){window.location.href=\"" + json.menus[i].href + "\";},400);' src='" + json.menus[i].icon + "' class='icon' ontouchstart='setTimeout(function(){window.location.href=\"" + json.menus[i].href + "\"};,400);'/></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.menus[i].title + "</figcaption>----></figure>");
+    $("#menuContainer").append("<a><img onclick='setTimeout(function(){window.location.href=\"" + json.menus[i].href + "\";},400);' src='" + json.menus[i].icon + "' class='icon' ontouchend='setTimeout(function(){window.location.href=\"" + json.menus[i].href + "\"};,400);'/></a><!----<figcaption style='color:black; padding-top:25px;'>" + json.menus[i].title + "</figcaption>----></figure>");
 }
 
 function guid() {
@@ -468,30 +649,10 @@ var Navigate = function (diff) {
     oBoxCollection.removeClass(cssClass).eq(displayBoxIndex).addClass(cssClass);
 
 }
-$(document).bind("scroll", function (event) {
-    event.preventDefault();
-});
-window.setTimeout(function () {$("#appplaceholder").remove();},500);
-window.onerror = function(message, url, lineNumber) {
-  if(message == "SyntaxError: syntax error" && lineNumber == 1) {
 
-  }
-  else {
-    if(lineNumber == 0 && message == "Script error.") {
+// Icon thing
+var sum = 0;
+$("#dockContainer.icon").each(function(){sum += $(this).width()});
+$("#dockContainer").css('width', sum);
 
-    }
-    else {
-      alert("The system booted with errors:\nLine " + lineNumber + "\n" + message + "\n" + url);
-    }
-  }
-   window.setTimeout(function () {
-    console.log(message);
-  if(message == "Script error." && lineNumber !== 0) {
-    location.reload();
-  }
-},0);
-};
-if(localStorage.newApp == 'true') {
-  localStorage.newApp = 'false';
-  location.reload();
-}
+//
